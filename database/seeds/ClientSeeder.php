@@ -13,13 +13,13 @@ class ClientSeeder extends Seeder
     {
         \App\Client::create([
             'name'      =>  'random',
-            'telephone'     =>  '0912345678'
+            'telephone'     =>  ''
         ]);
-        for ($i = 0; $i < 10; $i++) {
-            \App\Client::create([
-                'name'      =>  'random'.$i,
-                'telephone'     =>  '0912345678'
-            ]);
-        }
+//        for ($i = 0; $i < 10; $i++) {
+//            \App\Client::create([
+//                'name'      =>  'random'.$i,
+//                'telephone'     =>  '0912345678'
+//            ]);
+//        }
     }
 }

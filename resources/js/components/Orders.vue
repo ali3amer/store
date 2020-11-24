@@ -10,7 +10,7 @@
                                 <input type="text" class="form-control text-center" v-model="form.id" disabled>
                             </div>
                             <div class="col-6">
-                                <button v-if="'read_orders' in allPermissions" class="btn btn-primary" :disabled="form.id != ''" @click="createData()"><i
+                                <button v-if="'create_orders' in allPermissions" class="btn btn-primary" :disabled="form.id != ''" @click="createData()"><i
                                     class="fa fa-plus"></i></button>
                                 <button class="btn btn-success" :disabled="form.id == ''" @click="editMode == true ? saveOrder('edit') : saveOrder('new')"><i
                                     class="fa fa-save"></i></button>
@@ -901,7 +901,7 @@ export default {
         axios.get('api/product').then(({data}) => (this.products = data));
         axios.get('api/client').then(({data}) => (this.clients = data));
         this.loadData();
-        // this.putCategoryId('all');
+        this.putCategoryId('all');
         this.putClientId('all');
         $("#MyModal").modal('show');
     }

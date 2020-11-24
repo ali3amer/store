@@ -266,16 +266,22 @@
                                 <has-error :form="form" field="name"></has-error>
                             </div>
 
-                            <div class="form-group">
-                                <input v-model="form.purchase_price" v-show="editMode" type="text" name="purchase_price" placeholder="سعر الشراء"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('purchase_price') }">
-                                <has-error :form="form" field="purchase_price"></has-error>
-                            </div>
+                            <div class="row">
+                                <div :class="editMode ? 'col-6' : '' " class="form-group">
+                                    <label>سعر الشراء</label>
+                                    <input v-model="form.purchase_price" v-show="editMode" type="text" name="purchase_price" placeholder="سعر الشراء"
+                                           class="form-control" :class="{ 'is-invalid': form.errors.has('purchase_price') }">
+                                    <has-error :form="form" field="purchase_price"></has-error>
+                                </div>
 
-                            <div class="form-group">
-                                <input v-model="form.sale_price" v-show="editMode" type="text" name="sale_price" placeholder="سعر البيع"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('sale_price') }">
-                                <has-error :form="form" field="sale_price"></has-error>
+                                <div :class="editMode ? 'col-6' : '' " class="form-group" v-show="editMode">
+                                    <label>سعر البيع</label>
+                                    <input v-model="form.sale_price"  type="text" name="sale_price" placeholder="سعر البيع"
+                                           class="form-control" :class="{ 'is-invalid': form.errors.has('sale_price') }">
+                                    <has-error :form="form" field="sale_price"></has-error>
+                                </div>
+
+                                <div class="form-group"><label><span>الكميه المتبقيه: </span>{{ form.stock }}</label></div>
                             </div>
 
 

@@ -81,13 +81,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('login_design/style.css') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>تسجيل دخول</title>
 </head>
-<body>
+<body dir="rtl">
 <div class="logo"></div>
 <div class="box bg-img">
     <div class="content">
-        <h2>Sign<span> In</span></h2>
+        <h2>تسجيل<span> دخول</span></h2>
         <form method="POST" action="{{ route('login') }}">
             @csrf
         <div class="forms">
@@ -95,7 +95,7 @@
                 <input
                     type="text"
                     class="login-input @error('name') is-invalid @enderror" autocomplete="off"
-                    placeholder="user name" name="name" value="{{ old('name') }}" autofocus
+                    placeholder="إسم المستخدم" name="name" value="{{ old('name') }}" autofocus
                     id="name"
                     required
                 />
@@ -107,7 +107,7 @@
                 <input
                     type="password"
                     class="login-input @error('password') is-invalid @enderror" required
-                    placeholder="password" name="password"
+                    placeholder="كلمة المرور" name="password"
                     id="my-password"
                     required
                 />
@@ -121,7 +121,7 @@
         </div>
 
 
-        <button class="login-btn" type="submit">Sign In</button>
+        <button class="login-btn" type="submit">تسجيل دخول</button>
         </form>
     </div>
 </div>

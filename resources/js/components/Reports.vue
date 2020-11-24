@@ -55,7 +55,7 @@
                                                                                     الأقسام
                                                                                 </td>
                                                                             </tr>
-                                                                            <tr v-for="(category, index) in categories"
+                                                                            <tr v-for="(category, index) in categories.data"
                                                                                 @click="putCategoryId(category)">
                                                                                 <td>{{
                                                                                     category.name
@@ -569,7 +569,7 @@ export default {
         getResults(page = 1) {
             axios.get('api/category?page=' + page)
                 .then(response => {
-                    this.rows = response.data;
+                    this.categories = response.data;
                 });
         },
         updateData() {
@@ -711,16 +711,7 @@ export default {
         }
     },
     created() {
-        // Fire.$on('searching', () => {
-        //     let query = this.$parent.search;
-        //     axios.get('api/findUser?q=' + query)
-        //         .then((data) => {
-        //             this.users = data.data;
-        //         })
-        //         .catch(() => {
-        //             swal.fire("Failed", "There Was Something Wrong.", "warning");
-        //         });
-        // });
+
         this.loadData();
         axios.get('api/category').then(({data}) => (this.categories = data));
         axios.get('api/report?date=today').then(({data}) => (this.todayPaid = data));
@@ -728,10 +719,7 @@ export default {
         axios.get('api/report?date=expense').then(({data}) => (this.expense = data));
         this.putCategoryId('all');
 
-        // Fire.$on('afterCreate', () => {
-        //     this.loadData();
-        // });
-        //setInterval(() => this.loadData(), 3000);
+
     }
 }
 </script>

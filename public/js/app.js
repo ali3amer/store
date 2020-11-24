@@ -3672,8 +3672,8 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref13.data;
       return _this16.clients = data;
     });
-    this.loadData(); // this.putCategoryId('all');
-
+    this.loadData();
+    this.putCategoryId('all');
     this.putClientId('all');
     $("#MyModal").modal('show');
   }
@@ -3690,6 +3690,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4942,7 +4948,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get('api/category?page=' + page).then(function (response) {
-        _this2.rows = response.data;
+        _this2.categories = response.data;
       });
     },
     updateData: function updateData() {
@@ -5093,16 +5099,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this7 = this;
 
-    // Fire.$on('searching', () => {
-    //     let query = this.$parent.search;
-    //     axios.get('api/findUser?q=' + query)
-    //         .then((data) => {
-    //             this.users = data.data;
-    //         })
-    //         .catch(() => {
-    //             swal.fire("Failed", "There Was Something Wrong.", "warning");
-    //         });
-    // });
     this.loadData();
     axios.get('api/category').then(function (_ref7) {
       var data = _ref7.data;
@@ -5120,10 +5116,7 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref10.data;
       return _this7.expense = data;
     });
-    this.putCategoryId('all'); // Fire.$on('afterCreate', () => {
-    //     this.loadData();
-    // });
-    //setInterval(() => this.loadData(), 3000);
+    this.putCategoryId('all');
   }
 });
 
@@ -5285,6 +5278,7 @@ __webpack_require__.r(__webpack_exports__);
       searchUser: '',
       rows: {},
       editUser: {},
+      userPermissions: {},
       allPermissions: {},
       form: new Form({
         id: '',
@@ -5357,7 +5351,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.permissions = [];
       axios.get('api/' + this.routeName + '/' + row.id + '/edit').then(function (_ref3) {
         var data = _ref3.data;
-        return _this4.rows = data;
+        return _this4.form.permissions = data;
       });
     },
     deleteData: function deleteData(id) {
@@ -47241,7 +47235,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-6" }, [
-                "read_orders" in _vm.allPermissions
+                "create_orders" in _vm.allPermissions
                   ? _c(
                       "button",
                       {
@@ -49822,18 +49816,68 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.purchase_price,
-                              expression: "form.purchase_price"
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          class: _vm.editMode ? "col-6" : ""
+                        },
+                        [
+                          _c("label", [_vm._v("سعر الشراء")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.purchase_price,
+                                expression: "form.purchase_price"
+                              },
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editMode,
+                                expression: "editMode"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has(
+                                "purchase_price"
+                              )
                             },
+                            attrs: {
+                              type: "text",
+                              name: "purchase_price",
+                              placeholder: "سعر الشراء"
+                            },
+                            domProps: { value: _vm.form.purchase_price },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "purchase_price",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "purchase_price" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
                             {
                               name: "show",
                               rawName: "v-show",
@@ -49841,86 +49885,59 @@ var render = function() {
                               expression: "editMode"
                             }
                           ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("purchase_price")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "purchase_price",
-                            placeholder: "سعر الشراء"
-                          },
-                          domProps: { value: _vm.form.purchase_price },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                          staticClass: "form-group",
+                          class: _vm.editMode ? "col-6" : ""
+                        },
+                        [
+                          _c("label", [_vm._v("سعر البيع")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.sale_price,
+                                expression: "form.sale_price"
                               }
-                              _vm.$set(
-                                _vm.form,
-                                "purchase_price",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "purchase_price" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.sale_price,
-                              expression: "form.sale_price"
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("sale_price")
                             },
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.editMode,
-                              expression: "editMode"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("sale_price")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "sale_price",
-                            placeholder: "سعر البيع"
-                          },
-                          domProps: { value: _vm.form.sale_price },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                            attrs: {
+                              type: "text",
+                              name: "sale_price",
+                              placeholder: "سعر البيع"
+                            },
+                            domProps: { value: _vm.form.sale_price },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "sale_price",
+                                  $event.target.value
+                                )
                               }
-                              _vm.$set(
-                                _vm.form,
-                                "sale_price",
-                                $event.target.value
-                              )
                             }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "sale_price" }
-                        })
-                      ],
-                      1
-                    )
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "sale_price" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", [
+                          _c("span", [_vm._v("الكميه المتبقيه: ")]),
+                          _vm._v(_vm._s(_vm.form.stock))
+                        ])
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
@@ -50351,7 +50368,7 @@ var render = function() {
                                                     ]),
                                                     _vm._v(" "),
                                                     _vm._l(
-                                                      _vm.categories,
+                                                      _vm.categories.data,
                                                       function(
                                                         category,
                                                         index
@@ -51746,7 +51763,8 @@ var render = function() {
                                     },
                                     domProps: {
                                       checked:
-                                        map + "_" + model in _vm.allPermissions,
+                                        map + "_" + model in
+                                        _vm.userPermissions,
                                       value: map + "_" + model,
                                       checked: Array.isArray(
                                         _vm.form.permissions

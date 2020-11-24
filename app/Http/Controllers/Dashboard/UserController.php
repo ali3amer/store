@@ -81,7 +81,12 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        dd($user->allPermissions());
+        return $permissions = $user->allPermissions()->pluck('name');
+//        $data = [];
+//        foreach ($permissions as $permission) {
+//            $data[$permission] = $permission;
+//        }
+//        return $data;
     }
 
     /**
@@ -99,6 +104,8 @@ class UserController extends Controller
             'password' => 'sometimes|string|min:6'
         ]);
         $user->update($request->all());
+
+        $user->syncPermissions($request->permissions);
     }
 
     /**

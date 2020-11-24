@@ -107,7 +107,7 @@
                                     <div class="d-inline-block ml-3 mt-3" v-for="(map, index) in maps">
                                         <label><input class="mr-2" type="checkbox" name="permissions[]"
                                                       v-model="form.permissions"
-                                                      :checked="map + '_' + model in allPermissions"
+                                                      :checked="map + '_' + model in userPermissions"
                                                       :value="map + '_' + model ">{{ arabicMaps[index] }}</label>
                                     </div>
                                 </div>
@@ -146,6 +146,7 @@ export default {
             searchUser: '',
             rows: {},
             editUser: {},
+            userPermissions: {},
             allPermissions: {},
             form: new Form({
                 id: '',
@@ -203,7 +204,7 @@ export default {
             $("#" + this.modalTitle).modal('show');
             this.form.fill(row);
             this.form.permissions = [];
-            axios.get('api/' + this.routeName + '/' + row.id + '/edit').then(({data}) => (this.rows = data));
+            axios.get('api/' + this.routeName + '/' + row.id + '/edit').then(({data}) => (this.form.permissions = data));
 
         },
         deleteData(id) {

@@ -29,7 +29,7 @@
         <li>
             <router-link to="/reports">التقارير</router-link>
         </li>
-        @if(Auth::user()->hasPermission('create_users'))
+        @if(Auth::user()->hasPermission('create_expenses') || Auth::user()->hasPermission('read_expenses'))
             <li>
                 <router-link to="/expenses">المصروفات</router-link>
             </li>
