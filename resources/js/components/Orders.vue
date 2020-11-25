@@ -56,7 +56,7 @@
                                                                        class="table table-striped table-hover">
                                                                     <tr>
                                                                         <th scope="col">#</th>
-                                                                        <th scope="col">الباركود</th>
+<!--                                                                        <th scope="col">الباركود</th>-->
                                                                         <th scope="col">إسم المنتج</th>
                                                                         <th scope="col">الكميه</th>
                                                                         <th scope="col" style="width: 15% !important;">
@@ -66,12 +66,12 @@
                                                                     </tr>
                                                                     <tr v-for="(detail, index) in orderDetails"
                                                                         @click="editModal(orderDetails)">
-                                                                        <td>{{ index }}</td>
-                                                                        <td>{{
-                                                                                products[detail.product_id].barcode
-                                                                            }}
-                                                                        </td>
-                                                                        <td>{{ products[detail.product_id].name }}</td>
+                                                                        <td>{{ index + 1 }}</td>
+<!--                                                                        <td>{{-->
+<!--                                                                                products[detail.product_id].barcode-->
+<!--                                                                            }}-->
+<!--                                                                        </td>-->
+                                                                        <td>{{ detail.name }}</td>
                                                                         <td>{{ detail.quantity }}</td>
                                                                         <td>{{ detail.discount }}</td>
                                                                         <td>{{ detail.sale_price }}</td>
@@ -378,7 +378,7 @@
                                 <div class="form-group row">
                                     <label for="allTotal" class="col-sm-2 col-form-label">الجمله</label>
                                     <div class="col-sm-4">
-                                        <input type="number" min="1" :value="formatPrice(totalPrice)" class="form-control" readonly
+                                        <input type="number" min="1" :value="totalPrice" class="form-control" readonly
                                                id="allTotal">
                                     </div>
                                 </div>
@@ -386,7 +386,7 @@
                                 <div class="form-group row">
                                     <label for="discount" class="col-sm-2 col-form-label">التخفيض</label>
                                     <div class="col-sm-4">
-                                        <input type="number" min="1" :value="formatPrice(totalDiscount)" class="form-control" readonly
+                                        <input type="number" min="1" :value="totalDiscount" class="form-control" readonly
                                                id="allDiscount">
                                     </div>
                                 </div>
@@ -394,7 +394,7 @@
                                 <div class="form-group row">
                                     <label for="total" class="col-sm-2 col-form-label">الصافي</label>
                                     <div class="col-sm-4">
-                                        <input type="number" min="1" :value="formatPrice(price)" class="form-control" readonly id="total">
+                                        <input type="number" min="1" :value="price" class="form-control" readonly id="total">
                                     </div>
                                 </div>
                             </div>
@@ -422,41 +422,12 @@
                         <!-- Modal Body -->
                         <div class="modal-body">
                             <div class="invoice-box" id="printThis">
-                                <div class="top">
-                                    <div>
-                                        <div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="row">
-                                                        <div class="col-12">رقم الفاتوره #: 123</div>
-                                                        <div class="col-12">التاريخ: January 1, 2015</div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-6 text-right">
-                                                    <div class="title">
-                                                        <img src="https://www.sparksuite.com/images/logo.png"
-                                                             style="width:100%; max-width:300px;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="information">
-                                    <div colspan="2">
-                                        <div>
-                                            <div>
-                                                <div>
-                                                    Sparksuite, Inc.<br>
-                                                    12345 Sunny Road<br>
-                                                    Sunnyville, CA 12345
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="information text-center">
+                                    <h3>{{ setting.name }}</h3>
+                                    <div>{{ setting.location }}</div>
+                                    <div>{{ setting.telephones }}</div>
+                                    <div>فاتوره رقم : {{ orderId }}</div>
                                 </div>
 
                                 <table id="myTable" class="table text-center" cellpadding="0" cellspacing="0">
@@ -503,7 +474,7 @@
 
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" @click="printReport('printThis')"><i class="fa fa-print"></i></button>
+                            <button type="button" class="btn btn-primary" @click="printReport('printThis')"><i class="fa fa-print"></i></button>
                         </div>
 
                     </div>
@@ -533,6 +504,7 @@ export default {
             allPermissions: {},
             rows: {},
             row: [],
+            setting: {},
             orderDetails: [],
             categories: {},
             products: {},
@@ -541,6 +513,7 @@ export default {
             data_client: null,
             categoryName: '',
             clientName: '',
+            orderId: '',
             categorySearch: '',
             orderSearch: '',
             clientSearch: '',
@@ -609,6 +582,7 @@ export default {
         },
         saveOrder(status) {
             $("#MyModal").modal('show');
+            this.orderId = this.form.id;
             if (status == 'new') {
                 this.detail_form
                     .post("api/order_Detail")
@@ -796,10 +770,14 @@ export default {
             this.form.reset();
             this.detail_form.reset();
             this.ids = {};
+            this.temps = {};
             this.productList = {};
             // $("#" + this.modalTitle).modal('show');
         },
         editModal(row) {
+            this.ids = {};
+            this.temps = {};
+
             this.editMode = true;
             this.detail_form.order = row;
             this.productList = row;
@@ -810,8 +788,8 @@ export default {
             }
             this.ids = this.temps;
             for (let id in this.ids) {
-                this.detail_form.order[id].name = this.products[id].name;
-                this.detail_form.order[id].barcode = this.products[id].barcode;
+                // this.detail_form.order[id].name = this.products[id].name;
+                // this.detail_form.order[id].barcode = this.products[id].barcode;
                 this.totalPrice += this.detail_form.order[id].sale_price * this.detail_form.order[id].quantity;
                 this.totalDiscount += this.detail_form.order[id].discount
             }
@@ -852,6 +830,7 @@ export default {
             });
         },
         loadData() {
+            this.cancelOrder();
             // if(this.$gate.isAdminOrAuthor()) {
             axios.get('api/' + this.routeName).then(({data}) => (this.rows = data));
             // }
@@ -888,6 +867,8 @@ export default {
             this.totalPrice = 0;
             this.totalDiscount = 0;
             this.ids = {};
+            this.temps = {};
+
             this.productList = {};
         }
     },
@@ -903,7 +884,9 @@ export default {
         this.loadData();
         this.putCategoryId('all');
         this.putClientId('all');
-        $("#MyModal").modal('show');
+        // $("#MyModal").modal('show');
+        axios.get('api/setting').then(({data}) => (this.setting = data));
+
     }
 }
 </script>

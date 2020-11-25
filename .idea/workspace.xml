@@ -28,19 +28,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ecf9a02-88ba-438b-bf77-fe47f09329b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ClientSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ClientSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/css/table.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/login_design/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/login_design/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Orders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Orders.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Products.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Products.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Reports.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Reports.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Users.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +179,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/dashboard/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -191,11 +191,11 @@
       <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\store\resources\js\components" />
       <recent name="C:\xampp\htdocs\store\public\dashboard\js" />
       <recent name="C:\xampp\htdocs\store\public\dashboard\css" />
       <recent name="C:\xampp\htdocs\store\public\login_desgin" />
       <recent name="C:\xampp\htdocs\store\public\login" />
-      <recent name="C:\xampp\htdocs\store\public\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -265,7 +265,8 @@
       <workItem from="1606038749605" duration="12410000" />
       <workItem from="1606110768525" duration="23000" />
       <workItem from="1606111227140" duration="26512000" />
-      <workItem from="1606197114963" duration="5316000" />
+      <workItem from="1606197114963" duration="8734000" />
+      <workItem from="1606284925556" duration="23078000" />
     </task>
     <servers />
   </component>
@@ -293,11 +294,11 @@
       <screen x="0" y="0" width="1344" height="800" />
     </state>
     <state x="396" y="183" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1344.800@0.0.1344.800" timestamp="1605875045266" />
-    <state x="437" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605965308277">
+    <state x="437" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606326408783">
       <screen x="0" y="0" width="1344" height="800" />
     </state>
-    <state x="437" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1344.800@0.0.1344.800" timestamp="1605965308277" />
-    <state x="499" y="165" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1605788543635" />
+    <state x="437" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1344.800@0.0.1344.800" timestamp="1606326408783" />
+    <state x="499" y="165" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606285274243" />
     <state x="453" y="84" key="NewPhpClassDialog" timestamp="1604693886847">
       <screen x="0" y="0" width="1344" height="800" />
     </state>

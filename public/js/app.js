@@ -3204,35 +3204,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3246,6 +3217,7 @@ __webpack_require__.r(__webpack_exports__);
       allPermissions: {},
       rows: {},
       row: [],
+      setting: {},
       orderDetails: [],
       categories: {},
       products: {},
@@ -3254,6 +3226,7 @@ __webpack_require__.r(__webpack_exports__);
       data_client: null,
       categoryName: '',
       clientName: '',
+      orderId: '',
       categorySearch: '',
       orderSearch: '',
       clientSearch: '',
@@ -3331,6 +3304,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       $("#MyModal").modal('show');
+      this.orderId = this.form.id;
 
       if (status == 'new') {
         this.detail_form.post("api/order_Detail").then(function () {
@@ -3546,9 +3520,12 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       this.detail_form.reset();
       this.ids = {};
+      this.temps = {};
       this.productList = {}; // $("#" + this.modalTitle).modal('show');
     },
     editModal: function editModal(row) {
+      this.ids = {};
+      this.temps = {};
       this.editMode = true;
       this.detail_form.order = row;
       this.productList = row;
@@ -3562,8 +3539,8 @@ __webpack_require__.r(__webpack_exports__);
       this.ids = this.temps;
 
       for (var _id in this.ids) {
-        this.detail_form.order[_id].name = this.products[_id].name;
-        this.detail_form.order[_id].barcode = this.products[_id].barcode;
+        // this.detail_form.order[id].name = this.products[id].name;
+        // this.detail_form.order[id].barcode = this.products[id].barcode;
         this.totalPrice += this.detail_form.order[_id].sale_price * this.detail_form.order[_id].quantity;
         this.totalDiscount += this.detail_form.order[_id].discount;
       }
@@ -3611,7 +3588,8 @@ __webpack_require__.r(__webpack_exports__);
     loadData: function loadData() {
       var _this14 = this;
 
-      // if(this.$gate.isAdminOrAuthor()) {
+      this.cancelOrder(); // if(this.$gate.isAdminOrAuthor()) {
+
       axios.get('api/' + this.routeName).then(function (_ref10) {
         var data = _ref10.data;
         return _this14.rows = data;
@@ -3650,6 +3628,7 @@ __webpack_require__.r(__webpack_exports__);
       this.totalPrice = 0;
       this.totalDiscount = 0;
       this.ids = {};
+      this.temps = {};
       this.productList = {};
     }
   },
@@ -3674,8 +3653,12 @@ __webpack_require__.r(__webpack_exports__);
     });
     this.loadData();
     this.putCategoryId('all');
-    this.putClientId('all');
-    $("#MyModal").modal('show');
+    this.putClientId('all'); // $("#MyModal").modal('show');
+
+    axios.get('api/setting').then(function (_ref14) {
+      var data = _ref14.data;
+      return _this16.setting = data;
+    });
   }
 });
 
@@ -4802,56 +4785,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5117,6 +5050,221 @@ __webpack_require__.r(__webpack_exports__);
       return _this7.expense = data;
     });
     this.putCategoryId('all');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Settings.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Settings.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      editMode: false,
+      modalTitle: 'settings',
+      routeName: 'setting',
+      title: 'الإعدادات',
+      subtitle: 'إعداد',
+      searchClient: '',
+      allPermissions: {},
+      rows: {},
+      form: new Form({
+        id: '',
+        name: '',
+        telephones: '',
+        location: ''
+      })
+    };
+  },
+  props: ['auth_id', 'permissions'],
+  methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/' + this.routeName + '?page=' + page).then(function (response) {
+        _this.rows = response.data;
+      });
+    },
+    searchResults: function searchResults() {
+      var _this2 = this;
+
+      if (this.searchClient != '') {
+        axios.get('api/' + this.routeName + '?name=' + this.searchClient).then(function (_ref) {
+          var data = _ref.data;
+          return _this2.rows = data;
+        });
+      } else if (this.searchClient == '') {
+        axios.get('api/' + this.routeName).then(function (_ref2) {
+          var data = _ref2.data;
+          return _this2.rows = data;
+        });
+      }
+    },
+    updateData: function updateData() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.put('api/' + this.routeName + '/' + this.form.id).then(function () {
+        // Fire.$emit('afterCreate');
+        $("#" + _this3.modalTitle).modal('hide');
+
+        _this3.loadData();
+
+        toast.fire({
+          icon: 'success',
+          title: 'تم التعديل بنجاح'
+        });
+
+        _this3.$Progress.finish();
+      })["catch"](function () {
+        toast.fire({
+          icon: "error",
+          title: "لم يتم التعديل"
+        });
+      });
+    },
+    newModal: function newModal() {
+      this.editMode = false;
+      this.form.reset(); // $("#" + this.modalTitle).modal('show');
+    },
+    editModal: function editModal(row) {
+      this.editMode = true;
+      this.form.reset();
+      $("#" + this.modalTitle).modal('show');
+      this.form.fill(row);
+    },
+    deleteData: function deleteData(id) {
+      var _this4 = this;
+
+      swal.fire({
+        title: 'هل أنت متأكد أنك تريد الحذف',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'لا',
+        confirmButtonText: 'نعم'
+      }).then(function (result) {
+        _this4.$Progress.start();
+
+        if (result.value) {
+          _this4.form["delete"]('api/' + _this4.routeName + '/' + id).then(function () {
+            _this4.loadData();
+
+            _this4.$Progress.finish();
+
+            toast.fire({
+              icon: 'success',
+              title: 'تم الحذف بنجاح'
+            }); // Fire.$emit('afterCreate');
+          })["catch"](function () {
+            toast.fire({
+              icon: "error",
+              title: "لم يتم الحذف"
+            });
+          });
+        }
+      });
+    },
+    loadData: function loadData() {
+      var _this5 = this;
+
+      this.form.get('api/' + this.routeName).then(function (_ref3) {
+        var data = _ref3.data;
+        _this5.rows = data;
+
+        _this5.form.reset();
+
+        _this5.form.fill(_this5.rows);
+      })["catch"](function () {
+        toast.fire({
+          icon: "error",
+          title: "حدث خطأ"
+        });
+      });
+    },
+    createData: function createData() {
+      var _this6 = this;
+
+      this.$Progress.start();
+      $("#" + this.modalTitle).modal('hide');
+      this.form.post("api/" + this.routeName).then(function () {
+        // Fire.$emit("afterCreate");
+        $("#" + _this6.modalTitle).modal("hide");
+        toast.fire({
+          icon: "success",
+          title: "تم الحفظ بنجاح"
+        });
+
+        _this6.loadData();
+
+        _this6.$Progress.finish();
+      })["catch"](function () {
+        toast.fire({
+          icon: "error",
+          title: "لم يتم الحفظ"
+        });
+      });
+    }
+  },
+  created: function created() {
+    this.loadData();
+
+    for (var permission in this.permissions) {
+      this.allPermissions[this.permissions[permission]] = this.permissions[permission];
+    }
   }
 });
 
@@ -47439,28 +47587,11 @@ var render = function() {
                                                 },
                                                 [
                                                   _c("td", [
-                                                    _vm._v(_vm._s(index))
+                                                    _vm._v(_vm._s(index + 1))
                                                   ]),
                                                   _vm._v(" "),
                                                   _c("td", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        _vm.products[
-                                                          detail.product_id
-                                                        ].barcode
-                                                      ) +
-                                                        "\n                                                                    "
-                                                    )
-                                                  ]),
-                                                  _vm._v(" "),
-                                                  _c("td", [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        _vm.products[
-                                                          detail.product_id
-                                                        ].name
-                                                      )
-                                                    )
+                                                    _vm._v(_vm._s(detail.name))
                                                   ]),
                                                   _vm._v(" "),
                                                   _c("td", [
@@ -47695,7 +47826,7 @@ var render = function() {
                                                     _c("td", [
                                                       _vm._v(
                                                         _vm._s(category.name) +
-                                                          "\n                                                                    "
+                                                          "\n                                                                        "
                                                       )
                                                     ])
                                                   ]
@@ -47905,7 +48036,7 @@ var render = function() {
                                                   _c("td", [
                                                     _vm._v(
                                                       _vm._s(client.name) +
-                                                        "\n                                                                    "
+                                                        "\n                                                                        "
                                                     )
                                                   ])
                                                 ]
@@ -48359,7 +48490,7 @@ var render = function() {
                             readonly: "",
                             id: "allTotal"
                           },
-                          domProps: { value: _vm.formatPrice(_vm.totalPrice) }
+                          domProps: { value: _vm.totalPrice }
                         })
                       ])
                     ]),
@@ -48383,9 +48514,7 @@ var render = function() {
                             readonly: "",
                             id: "allDiscount"
                           },
-                          domProps: {
-                            value: _vm.formatPrice(_vm.totalDiscount)
-                          }
+                          domProps: { value: _vm.totalDiscount }
                         })
                       ])
                     ]),
@@ -48409,7 +48538,7 @@ var render = function() {
                             readonly: "",
                             id: "total"
                           },
-                          domProps: { value: _vm.formatPrice(_vm.price) }
+                          domProps: { value: _vm.price }
                         })
                       ])
                     ])
@@ -48444,9 +48573,15 @@ var render = function() {
                   "div",
                   { staticClass: "invoice-box", attrs: { id: "printThis" } },
                   [
-                    _vm._m(11),
-                    _vm._v(" "),
-                    _vm._m(12),
+                    _c("div", { staticClass: "information text-center" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.setting.name))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(_vm.setting.location))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(_vm.setting.telephones))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v("فاتوره رقم : " + _vm._s(_vm.orderId))])
+                    ]),
                     _vm._v(" "),
                     _c(
                       "table",
@@ -48459,7 +48594,7 @@ var render = function() {
                         }
                       },
                       [
-                        _vm._m(13),
+                        _vm._m(11),
                         _vm._v(" "),
                         _vm._l(_vm.ids, function(id, index) {
                           return _c("tr", { staticClass: "item" }, [
@@ -48527,7 +48662,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-default",
+                    staticClass: "btn btn-primary",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -48570,8 +48705,6 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
       _vm._v(" "),
-      _c("th", { attrs: { scope: "col" } }, [_vm._v("الباركود")]),
-      _vm._v(" "),
       _c("th", { attrs: { scope: "col" } }, [_vm._v("إسم المنتج")]),
       _vm._v(" "),
       _c("th", { attrs: { scope: "col" } }, [_vm._v("الكميه")]),
@@ -48581,7 +48714,7 @@ var staticRenderFns = [
         { staticStyle: { width: "15% !important" }, attrs: { scope: "col" } },
         [
           _vm._v(
-            "\n                                                                        التخفيض\n                                                                    "
+            "\n                                                                            التخفيض\n                                                                        "
           )
         ]
       ),
@@ -48721,65 +48854,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "top" }, [
-      _c("div", [
-        _c("div", [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-6" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._v("رقم الفاتوره #: 123")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._v("التاريخ: January 1, 2015")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-6 text-right" }, [
-              _c("div", { staticClass: "title" }, [
-                _c("img", {
-                  staticStyle: { width: "100%", "max-width": "300px" },
-                  attrs: { src: "https://www.sparksuite.com/images/logo.png" }
-                })
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "information" }, [
-      _c("div", { attrs: { colspan: "2" } }, [
-        _c("div", [
-          _c("div", [
-            _c("div", [
-              _vm._v(
-                "\n                                                Sparksuite, Inc."
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                                                12345 Sunny Road"
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                                                Sunnyville, CA 12345\n                                            "
-              )
-            ])
-          ])
-        ])
-      ])
     ])
   },
   function() {
@@ -49820,6 +49894,14 @@ var render = function() {
                       _c(
                         "div",
                         {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.editMode,
+                              expression: "editMode"
+                            }
+                          ],
                           staticClass: "form-group",
                           class: _vm.editMode ? "col-6" : ""
                         },
@@ -49931,12 +50013,26 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", [
-                          _c("span", [_vm._v("الكميه المتبقيه: ")]),
-                          _vm._v(_vm._s(_vm.form.stock))
-                        ])
-                      ])
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.editMode,
+                              expression: "editMode"
+                            }
+                          ],
+                          staticClass: "form-group col-6"
+                        },
+                        [
+                          _c("label", [
+                            _c("span", [_vm._v("الكميه المتبقيه: ")]),
+                            _vm._v(_vm._s(_vm.form.stock))
+                          ])
+                        ]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -50361,7 +50457,7 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "كل\n                                                                                    الأقسام\n                                                                                "
+                                                            "كل\n                                                                                الأقسام\n                                                                            "
                                                           )
                                                         ]
                                                       )
@@ -50392,7 +50488,7 @@ var render = function() {
                                                                 _vm._s(
                                                                   category.name
                                                                 ) +
-                                                                  "\n                                                                                "
+                                                                  "\n                                                                            "
                                                               )
                                                             ])
                                                           ]
@@ -50649,8 +50745,6 @@ var render = function() {
                   [
                     _vm._m(5),
                     _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
                     _vm._l(_vm.from_to, function(row, index) {
                       return _c("div", [
                         _c("h4", [_vm._v(_vm._s(row.name))]),
@@ -50662,7 +50756,7 @@ var render = function() {
                             attrs: { cellpadding: "0", cellspacing: "0" }
                           },
                           [
-                            _vm._m(7, true),
+                            _vm._m(6, true),
                             _vm._v(" "),
                             _vm._l(row.orders, function(item, index) {
                               return _c("tr", { staticClass: "item" }, [
@@ -50737,9 +50831,9 @@ var render = function() {
                   "div",
                   { staticClass: "invoice-box", attrs: { id: "myTable" } },
                   [
-                    _vm._m(8),
+                    _vm._m(7),
                     _vm._v(" "),
-                    _vm._m(9),
+                    _vm._m(8),
                     _vm._v(" "),
                     _vm._l(_vm.rows, function(row, index) {
                       return _c("div", [
@@ -50752,7 +50846,7 @@ var render = function() {
                             attrs: { cellpadding: "0", cellspacing: "0" }
                           },
                           [
-                            _vm._m(10, true),
+                            _vm._m(9, true),
                             _vm._v(" "),
                             _vm._l(row.products, function(product, index) {
                               return _c("tr", { staticClass: "item" }, [
@@ -50825,9 +50919,9 @@ var render = function() {
                   "div",
                   { staticClass: "invoice-box", attrs: { id: "today" } },
                   [
-                    _vm._m(11),
+                    _vm._m(10),
                     _vm._v(" "),
-                    _vm._m(12),
+                    _vm._m(11),
                     _vm._v(" "),
                     _vm._l(_vm.today, function(day, index) {
                       return _c("div", [
@@ -50840,7 +50934,7 @@ var render = function() {
                             attrs: { cellpadding: "0", cellspacing: "0" }
                           },
                           [
-                            _vm._m(13, true),
+                            _vm._m(12, true),
                             _vm._v(" "),
                             _vm._l(day.orders, function(item, index) {
                               return _c("tr", { staticClass: "item" }, [
@@ -50913,9 +51007,15 @@ var render = function() {
                   "div",
                   { staticClass: "invoice-box", attrs: { id: "expenses" } },
                   [
-                    _vm._m(14),
-                    _vm._v(" "),
-                    _vm._m(15),
+                    _c("div", { staticClass: "information text-center" }, [
+                      _c("h3", [_vm._v(_vm._s(_vm.setting.name))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(_vm.setting.location))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v(_vm._s(_vm.setting.telephones))]),
+                      _vm._v(" "),
+                      _c("div", [_vm._v("فاتوره رقم : " + _vm._s(_vm.orderId))])
+                    ]),
                     _vm._v(" "),
                     _c("h4", [_vm._v("المصروفات")]),
                     _vm._v(" "),
@@ -50926,7 +51026,7 @@ var render = function() {
                         attrs: { cellpadding: "0", cellspacing: "0" }
                       },
                       [
-                        _vm._m(16),
+                        _vm._m(13),
                         _vm._v(" "),
                         _vm._l(_vm.expenses, function(item, index) {
                           return _c("tr", { staticClass: "item" }, [
@@ -51024,59 +51124,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "top" }, [
-      _c("div", [
-        _c("div", [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-6" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._v("رقم الفاتوره #: 123")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._v("التاريخ: January 1, 2015")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-6 text-right" }, [
-              _c("div", { staticClass: "title" }, [
-                _c("img", {
-                  staticStyle: { width: "100%", "max-width": "300px" },
-                  attrs: { src: "https://www.sparksuite.com/images/logo.png" }
-                })
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "information" }, [
-      _c("div", { attrs: { colspan: "2" } }, [
-        _c("div", [
-          _c("div", [
-            _c("div", [
-              _vm._v(
-                "\n                                                Sparksuite, Inc."
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                                                12345 Sunny Road"
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                                                Sunnyville, CA 12345\n                                            "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "information text-center" }, [
+      _c("h3", [_vm._v("نايل")]),
+      _vm._v(" "),
+      _c("div", [_vm._v("السوق الكبير")]),
+      _vm._v(" "),
+      _c("div", [_vm._v("099992871")]),
+      _vm._v(" "),
+      _c("div", [_vm._v("تقرير من 25-02-2020 / 14-05-2020")])
     ])
   },
   function() {
@@ -51144,15 +51199,15 @@ var staticRenderFns = [
           _c("div", [
             _c("div", [
               _vm._v(
-                "\n                                                Sparksuite, Inc."
+                "\n                                            Sparksuite, Inc."
               ),
               _c("br"),
               _vm._v(
-                "\n                                                12345 Sunny Road"
+                "\n                                            12345 Sunny Road"
               ),
               _c("br"),
               _vm._v(
-                "\n                                                Sunnyville, CA 12345\n                                            "
+                "\n                                            Sunnyville, CA 12345\n                                        "
               )
             ])
           ])
@@ -51221,15 +51276,15 @@ var staticRenderFns = [
           _c("div", [
             _c("div", [
               _vm._v(
-                "\n                                                Sparksuite, Inc."
+                "\n                                            Sparksuite, Inc."
               ),
               _c("br"),
               _vm._v(
-                "\n                                                12345 Sunny Road"
+                "\n                                            12345 Sunny Road"
               ),
               _c("br"),
               _vm._v(
-                "\n                                                Sunnyville, CA 12345\n                                            "
+                "\n                                            Sunnyville, CA 12345\n                                        "
               )
             ])
           ])
@@ -51263,65 +51318,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "top" }, [
-      _c("div", [
-        _c("div", [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-6" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._v("رقم الفاتوره #: 123")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12" }, [
-                  _vm._v("التاريخ: January 1, 2015")
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-6 text-right" }, [
-              _c("div", { staticClass: "title" }, [
-                _c("img", {
-                  staticStyle: { width: "100%", "max-width": "300px" },
-                  attrs: { src: "https://www.sparksuite.com/images/logo.png" }
-                })
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "information" }, [
-      _c("div", { attrs: { colspan: "2" } }, [
-        _c("div", [
-          _c("div", [
-            _c("div", [
-              _vm._v(
-                "\n                                                Sparksuite, Inc."
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                                                12345 Sunny Road"
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                                                Sunnyville, CA 12345\n                                            "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "heading" }, [
         _c("td", [_vm._v("الرقم")]),
@@ -51335,6 +51331,187 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Settings.vue?vue&type=template&id=3a09080e&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Settings.vue?vue&type=template&id=3a09080e& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-6" }, [
+            _c("div", { staticClass: "col-3" }, [
+              _c("h3", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.title))
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "form",
+          {
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.createData()
+              }
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.name,
+                      expression: "form.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.form.errors.has("name") },
+                  attrs: {
+                    type: "text",
+                    name: "name",
+                    placeholder: "إسم المحل"
+                  },
+                  domProps: { value: _vm.form.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("has-error", { attrs: { form: _vm.form, field: "name" } })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.telephones,
+                      expression: "form.telephones"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.form.errors.has("telephones") },
+                  attrs: {
+                    type: "text",
+                    name: "telephones",
+                    placeholder: "أرقام الهواتف"
+                  },
+                  domProps: { value: _vm.form.telephones },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "telephones", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("has-error", {
+                  attrs: { form: _vm.form, field: "telephones" }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.location,
+                      expression: "form.location"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.form.errors.has("location") },
+                  attrs: {
+                    type: "text",
+                    name: "location",
+                    placeholder: "الموقع"
+                  },
+                  domProps: { value: _vm.form.location },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "location", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("has-error", {
+                  attrs: { form: _vm.form, field: "location" }
+                })
+              ],
+              1
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "submit" },
+            on: {
+              click: function($event) {
+                return _vm.createData()
+              }
+            }
+          },
+          [_vm._v("إضافه")]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -67225,6 +67402,9 @@ var routes = [{
 }, {
   path: '/users',
   component: __webpack_require__(/*! ./components/Users.vue */ "./resources/js/components/Users.vue")["default"]
+}, {
+  path: '/settings',
+  component: __webpack_require__(/*! ./components/Settings.vue */ "./resources/js/components/Settings.vue")["default"]
 } // { path: '/', component: require('./components/Master.vue').default,
 // children: [
 //     { path: 'users', component: require('./components/Users.vue').default }
@@ -67782,6 +67962,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reports_vue_vue_type_template_id_6c52f8b8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reports_vue_vue_type_template_id_6c52f8b8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Settings.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Settings.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Settings_vue_vue_type_template_id_3a09080e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Settings.vue?vue&type=template&id=3a09080e& */ "./resources/js/components/Settings.vue?vue&type=template&id=3a09080e&");
+/* harmony import */ var _Settings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Settings.vue?vue&type=script&lang=js& */ "./resources/js/components/Settings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Settings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Settings_vue_vue_type_template_id_3a09080e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Settings_vue_vue_type_template_id_3a09080e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Settings.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Settings.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Settings.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Settings.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Settings.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Settings.vue?vue&type=template&id=3a09080e&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Settings.vue?vue&type=template&id=3a09080e& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_3a09080e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Settings.vue?vue&type=template&id=3a09080e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Settings.vue?vue&type=template&id=3a09080e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_3a09080e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Settings_vue_vue_type_template_id_3a09080e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

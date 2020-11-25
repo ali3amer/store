@@ -7,6 +7,7 @@ use App\Order;
 use App\Order_Detail;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -56,7 +57,16 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return $order->details()->get()->keyBy('product_id');
+//        $order = DB::table('order__details')
+//            ->join('products', 'order__details.product_id', '=', 'products.id')
+//            ->select('order__details.*', 'products.name')->orderBy('order__details.id')
+//            ->where('order__details.order_id', $order->id)->get();
+//
+//        dd($order);
+
+//        return $order->details()->get()->keyBy('product_id');
+//        return response()->json(['categories' => $categories, 'sumPrice' => $sumPrice]);
+        return $order->details()->join('products', 'product_id', '=', 'products.id')->get(['order__details.*', 'products.name'])->keyBy('product_id');
     }
 
     /**
@@ -82,9 +92,11 @@ class OrderController extends Controller
         if (Order_Detail::where('order_id', $order->id)->count() > 0) {
             foreach ($request->order as $item) {
                 $order_quantity = Order_Detail::where('order_id', $order->id)->where('product_id', $item['product_id'])->first();
+                if ($order_quantity != null) {
                 $stock = Product::find($item['product_id'])->stock;
                 $stock = $stock + $order_quantity->quantity;
                 Product::find($item['product_id'])->update(['stock' => $stock]);
+                }
             }
         }
         Order_Detail::where('order_id', $request->order_id)->delete();

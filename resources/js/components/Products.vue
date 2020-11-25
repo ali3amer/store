@@ -267,7 +267,7 @@
                             </div>
 
                             <div class="row">
-                                <div :class="editMode ? 'col-6' : '' " class="form-group">
+                                <div v-show="editMode" :class="editMode ? 'col-6' : '' " class="form-group">
                                     <label>سعر الشراء</label>
                                     <input v-model="form.purchase_price" v-show="editMode" type="text" name="purchase_price" placeholder="سعر الشراء"
                                            class="form-control" :class="{ 'is-invalid': form.errors.has('purchase_price') }">
@@ -281,7 +281,7 @@
                                     <has-error :form="form" field="sale_price"></has-error>
                                 </div>
 
-                                <div class="form-group"><label><span>الكميه المتبقيه: </span>{{ form.stock }}</label></div>
+                                <div v-show="editMode" class="form-group col-6"><label><span>الكميه المتبقيه: </span>{{ form.stock }}</label></div>
                             </div>
 
 

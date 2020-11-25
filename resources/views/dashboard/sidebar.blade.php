@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div class="logo-area text-center">tto</div>
+    <div class="logo-area text-center">{{ App\Setting::find(1)->name }}</div>
     <ul class="links-area list-unstyled">
         @if(Auth::user()->hasPermission('create_users') || Auth::user()->hasPermission('read_users'))
             <li>
@@ -34,5 +34,11 @@
                 <router-link to="/expenses">المصروفات</router-link>
             </li>
         @endif
+
+            @if(Auth::user()->hasRole('super_admin'))
+                <li>
+                    <router-link to="/settings">الإعدادات</router-link>
+                </li>
+            @endif
     </ul>
 </div>

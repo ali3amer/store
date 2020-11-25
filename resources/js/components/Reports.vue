@@ -58,7 +58,7 @@
                                                                             <tr v-for="(category, index) in categories.data"
                                                                                 @click="putCategoryId(category)">
                                                                                 <td>{{
-                                                                                    category.name
+                                                                                        category.name
                                                                                     }}
                                                                                 </td>
                                                                             </tr>
@@ -66,7 +66,8 @@
                                                                         </table>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <pagination :data="categories" @pagination-change-page="getResults"></pagination>
+                                                                        <pagination :data="categories"
+                                                                                    @pagination-change-page="getResults"></pagination>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -78,12 +79,12 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">مصروفات</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" :value="formatPrice(expense)" readonly
-                                                   class="form-control">
+                                            <label class="col-sm-4 col-form-label">مصروفات</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" :value="formatPrice(expense)" readonly
+                                                       class="form-control">
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +122,8 @@
                                 <div class="form-group row">
                                     <label for="from" class="col-sm-3 col-form-label">من</label>
                                     <div class="col-sm-9">
-                                        <input type="date" :disabled="from_to_form.category_id == ''" v-model="from_to_form.from" required class="form-control" id="from">
+                                        <input type="date" :disabled="from_to_form.category_id == ''"
+                                               v-model="from_to_form.from" required class="form-control" id="from">
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +131,9 @@
                                 <div class="form-group row">
                                     <label for="to" class="col-sm-3 col-form-label">الى</label>
                                     <div class="col-sm-9">
-                                        <input type="date" v-model="from_to_form.to" @change="createData('from_to')" :disabled="from_to_form.from == ''" required class="form-control" id="to">
+                                        <input type="date" v-model="from_to_form.to" @change="createData('from_to')"
+                                               :disabled="from_to_form.from == ''" required class="form-control"
+                                               id="to">
                                     </div>
                                 </div>
                             </div>
@@ -141,10 +145,12 @@
             <div class="col-12 mt-2">
                 <div class="card">
                     <div class="card-body">
-                        <button class="btn btn-primary":disabled="from_to_form.category_id == ''" @click="createData('inventory_form')"><span><i
+                        <button class="btn btn-primary" :disabled="from_to_form.category_id == ''"
+                                @click="createData('inventory_form')"><span><i
                             class="fa fa-calculator"></i></span>
                             <span> جرد</span></button>
-                        <button class="btn btn-success":disabled="from_to_form.category_id == ''" @click="createData('today_form')"><span><i
+                        <button class="btn btn-success" :disabled="from_to_form.category_id == ''"
+                                @click="createData('today_form')"><span><i
                             class="fa fa-calendar"></i></span>
                             <span> تقرير اليوم</span></button>
                     </div>
@@ -159,44 +165,16 @@
                 <div class="card mb-3" v-if="Object.keys(from_to).length != 0">
 
                     <div class="card-body">
-                        <button class="btn btn btn-primary" @click="printReport('from_to')"><i class="fa fa-print"></i></button>
+                        <button class="btn btn btn-primary" @click="printReport('from_to')"><i class="fa fa-print"></i>
+                        </button>
 
                         <div class="invoice-box" id="from_to">
-                            <div class="top">
-                                <div>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="row">
-                                                    <div class="col-12">رقم الفاتوره #: 123</div>
-                                                    <div class="col-12">التاريخ: January 1, 2015</div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-6 text-right">
-                                                <div class="title">
-                                                    <img src="https://www.sparksuite.com/images/logo.png"
-                                                         style="width:100%; max-width:300px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="information">
-                                <div colspan="2">
-                                    <div>
-                                        <div>
-                                            <div>
-                                                Sparksuite, Inc.<br>
-                                                12345 Sunny Road<br>
-                                                Sunnyville, CA 12345
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="information text-center">
+                                <h3>نايل</h3>
+                                <div>السوق الكبير</div>
+                                <div>099992871</div>
+                                <div>تقرير من 25-02-2020 / 14-05-2020</div>
                             </div>
 
                             <div v-for="(row, index) in from_to">
@@ -239,10 +217,10 @@
                 </div>
 
 
-
                 <div class="card mb-3" v-if="Object.keys(rows).length != 0">
                     <div class="card-body">
-                        <button class="btn btn btn-primary" @click="printReport('myTable')"><i class="fa fa-print"></i></button>
+                        <button class="btn btn btn-primary" @click="printReport('myTable')"><i class="fa fa-print"></i>
+                        </button>
 
                         <div class="invoice-box" id="myTable">
                             <div class="top">
@@ -308,9 +286,9 @@
                                     <tr class="total heading">
                                         <td colspan="4">الجــــــــــــلـــمه</td>
                                         <td>{{ formatPrice(sumPrice[row.id]) }}</td>
-<!--                                        <td>{{ // sumPrice[row.id] }}</td>-->
-<!--                                        <td>{{ // sumStock[row.id] }}</td>-->
-<!--                                        <td>{{ sumStock[row.id] * sumPrice[row.id] }}</td>-->
+                                        <!--                                        <td>{{ // sumPrice[row.id] }}</td>-->
+                                        <!--                                        <td>{{ // sumStock[row.id] }}</td>-->
+                                        <!--                                        <td>{{ sumStock[row.id] * sumPrice[row.id] }}</td>-->
                                     </tr>
 
                                 </table>
@@ -321,10 +299,10 @@
                 </div>
 
 
-
                 <div class="card mb-3" v-if="Object.keys(today).length != 0">
                     <div class="card-body">
-                        <button class="btn btn btn-primary" @click="printReport('today')"><i class="fa fa-print"></i></button>
+                        <button class="btn btn btn-primary" @click="printReport('today')"><i class="fa fa-print"></i>
+                        </button>
                         <div class="invoice-box" id="today">
                             <div class="top">
                                 <div>
@@ -366,7 +344,7 @@
                             <div v-for="(day, index) in today">
                                 <h4>{{ day.name }}</h4>
 
-                                <table  class="table text-center" cellpadding="0" cellspacing="0">
+                                <table class="table text-center" cellpadding="0" cellspacing="0">
                                     <thead>
                                     <tr class="heading">
                                         <td>الرقم</td>
@@ -404,71 +382,43 @@
 
                 <div class="card mb-3" v-if="Object.keys(expenses).length != 0">
                     <div class="card-body">
-                        <button class="btn btn btn-primary" @click="printReport('expenses')"><i class="fa fa-print"></i></button>
+                        <button class="btn btn btn-primary" @click="printReport('expenses')"><i class="fa fa-print"></i>
+                        </button>
                         <div class="invoice-box" id="expenses">
-                            <div class="top">
-                                <div>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="row">
-                                                    <div class="col-12">رقم الفاتوره #: 123</div>
-                                                    <div class="col-12">التاريخ: January 1, 2015</div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-6 text-right">
-                                                <div class="title">
-                                                    <img src="https://www.sparksuite.com/images/logo.png"
-                                                         style="width:100%; max-width:300px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="information text-center">
+                                <h3>{{ setting.name }}</h3>
+                                <div>{{ setting.location }}</div>
+                                <div>{{ setting.telephones }}</div>
+                                <div>فاتوره رقم : {{ orderId }}</div>
                             </div>
 
-                            <div class="information">
-                                <div colspan="2">
-                                    <div>
-                                        <div>
-                                            <div>
-                                                Sparksuite, Inc.<br>
-                                                12345 Sunny Road<br>
-                                                Sunnyville, CA 12345
-                                            </div>
+                            <h4>المصروفات</h4>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <table class="table text-center" cellpadding="0" cellspacing="0">
+                                <thead>
+                                <tr class="heading">
+                                    <td>الرقم</td>
+                                    <td>إسم المنتج</td>
+                                    <td>المبلغ</td>
+                                    <td>التاريخ</td>
+                                </tr>
+                                </thead>
 
-                                <h4>المصروفات</h4>
+                                <tr class="item" v-for="(item, index) in expenses">
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ formatPrice(item.price) }}</td>
+                                    <td>{{ item.created_at }}</td>
+                                </tr>
 
-                                <table  class="table text-center" cellpadding="0" cellspacing="0">
-                                    <thead>
-                                    <tr class="heading">
-                                        <td>الرقم</td>
-                                        <td>إسم المنتج</td>
-                                        <td>المبلغ</td>
-                                        <td>التاريخ</td>
-                                    </tr>
-                                    </thead>
+                                <tr class="total heading">
+                                    <td colspan="2">الجــــــــــــلـــمه</td>
+                                    <td>{{ formatPrice(expensesSum) }}</td>
+                                    <td></td>
+                                </tr>
 
-                                    <tr class="item" v-for="(item, index) in expenses">
-                                        <td>{{ index + 1 }}</td>
-                                        <td>{{ item.name }}</td>
-                                        <td>{{ formatPrice(item.price) }}</td>
-                                        <td>{{ item.created_at }}</td>
-                                    </tr>
-
-                                    <tr class="total heading">
-                                        <td colspan="2">الجــــــــــــلـــمه</td>
-                                        <td>{{ formatPrice(expensesSum) }}</td>
-                                        <td></td>
-                                    </tr>
-
-                                </table>
+                            </table>
 
 
                         </div>

@@ -103,7 +103,11 @@ class UserController extends Controller
             'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
             'password' => 'sometimes|string|min:6'
         ]);
-        $user->update($request->all());
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request['password'])
+        ]);
 
         $user->syncPermissions($request->permissions);
     }
