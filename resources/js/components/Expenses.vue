@@ -9,8 +9,8 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-3"><h3 class="card-title">{{ title }}</h3></div>
-                            <div class="col-6"><input type="text" placeholder="بحث ...." class="form-control"
+                            <div class="col-4"><h3 class="card-title">{{ title }}</h3></div>
+                            <div class="col-5"><input type="text" placeholder="بحث ...." class="form-control"
                                                       v-model="searchExpense" @keyup="searchResults"></div>
                         </div>
                     </div>
@@ -112,7 +112,8 @@ export default {
             form: new Form({
                 id: '',
                 name: '',
-                price: ''
+                price: '',
+                user_id: this.auth_id
             })
         }
     },

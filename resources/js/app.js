@@ -53,6 +53,7 @@ const routes = [
     {path: '/reports', component: require('./components/Reports.vue').default},
     {path: '/users', component: require('./components/Users.vue').default},
     {path: '/settings', component: require('./components/Settings.vue').default},
+    {path: '/control', component: require('./components/Control.vue').default},
     // { path: '/', component: require('./components/Master.vue').default,
     // children: [
     //     { path: 'users', component: require('./components/Users.vue').default }

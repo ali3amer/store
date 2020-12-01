@@ -66,7 +66,7 @@
                                                                     </tr>
                                                                     <tr v-for="(detail, index) in orderDetails"
                                                                         @click="editModal(orderDetails)">
-                                                                        <td>{{ index + 1 }}</td>
+                                                                        <td>{{ index }}</td>
 <!--                                                                        <td>{{-->
 <!--                                                                                products[detail.product_id].barcode-->
 <!--                                                                            }}-->
@@ -530,10 +530,12 @@ export default {
             maxQuantity: 0,
             form: new Form({
                 id: '',
-                client_id: 1
+                client_id: 1,
+                user_id: this.auth_id
             }),
             detail_form: new Form({
                 id: '',
+                user_id: this.auth_id,
                 order_id: '',
                 order: {}
             }),

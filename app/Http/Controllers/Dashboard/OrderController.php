@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Order_Detail;
 use App\Product;
+use App\Update_Order;
+use App\Update_Order_Details;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,21 +40,22 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'client_id' => 'required|integer'
+            'client_id' => 'required|integer',
+            'user_id' => 'required|integer',
         ]);
-        return Order::create(['client_id' => $request->client_id]);
+        return Order::create(['client_id' => $request->client_id, 'user_id' => $request->user_id]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
@@ -72,7 +75,7 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -83,19 +86,40 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Order $order)
     {
         if (Order_Detail::where('order_id', $order->id)->count() > 0) {
+
+            $order->update(['user_id' => $request->user_id]);
+
+            $update_order = Update_Order::create([
+                'order_id' => $order->id,
+                'client_id' => $order->client_id,
+                'user_id' => $order->user_id
+            ]);
+
+            $details = Order_Detail::where('order_id', $order->id)->get();
+            foreach ($details as $detail) {
+                Update_Order_Details::create([
+                    'update_order_id' => $update_order->id,
+                    'order_id' => $detail['order_id'],
+                    'product_id' => $detail['product_id'],
+                    'sale_price' => $detail['sale_price'],
+                    'quantity' => $detail['quantity'],
+                    'discount' => $detail['discount'],
+                    'paid_price' => $detail['paid_price']
+                ]);
+            }
             foreach ($request->order as $item) {
                 $order_quantity = Order_Detail::where('order_id', $order->id)->where('product_id', $item['product_id'])->first();
                 if ($order_quantity != null) {
-                $stock = Product::find($item['product_id'])->stock;
-                $stock = $stock + $order_quantity->quantity;
-                Product::find($item['product_id'])->update(['stock' => $stock]);
+                    $stock = Product::find($item['product_id'])->stock;
+                    $stock = $stock + $order_quantity->quantity;
+                    Product::find($item['product_id'])->update(['stock' => $stock]);
                 }
             }
         }
@@ -120,7 +144,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(Order $order)
@@ -132,7 +156,7 @@ class OrderController extends Controller
             Product::find($item['product_id'])->update(['stock' => $stock]);
         }
 
-        Order_Detail::where('order_id', $order->id)->delete();
+//        Order_Detail::where('order_id', $order->id)->delete();
         $order->delete();
     }
 }

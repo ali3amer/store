@@ -29,4 +29,5 @@ Route::resource('report', 'Dashboard\ReportController');
 Route::resource('expense', 'Dashboard\ExpenseController');
 Route::resource('price', 'Dashboard\PriceController');
 Route::resource('setting', 'Dashboard\SettingController');
+Route::get('control', 'Dashboard\ControlController@index');
 //Route::resource('product_detail', PhotoController::class);

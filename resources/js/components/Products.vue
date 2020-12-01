@@ -14,8 +14,8 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="row">
-                                            <div class="col-4"><h3 class="card-title">{{ title }}</h3></div>
-                                            <div class="col-8"><input type="text" placeholder="بحث ...." class="form-control"
+                                            <div class="col-5"><h3 class="card-title">{{ title }}</h3></div>
+                                            <div class="col-7"><input type="text" placeholder="بحث ...." class="form-control"
                                                                       v-model="searchProduct" @keyup="searchResults"></div>
                                         </div>
                                     </div>

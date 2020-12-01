@@ -27,15 +27,22 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0ecf9a02-88ba-438b-bf77-fe47f09329b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Settings.vue" afterDir="false" />
+    <list default="true" id="0ecf9a02-88ba-438b-bf77-fe47f09329b8" name="Default Changelist" comment="nhnh">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/Control.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Expense.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Expense.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ExpenseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ExpenseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/css/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ProductDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ProductDetailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_083141_create_product__details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_20_083141_create_product__details_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_103220_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_20_103220_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_13_161041_create_expenses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_13_161041_create_expenses_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Expenses.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Expenses.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Orders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Orders.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Products.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Products.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Reports.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Reports.vue" afterDir="false" />
@@ -179,23 +186,24 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Dashboard" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
       <recent name="C:\xampp\htdocs\store\resources\js\components" />
       <recent name="C:\xampp\htdocs\store\public\dashboard\js" />
       <recent name="C:\xampp\htdocs\store\public\dashboard\css" />
       <recent name="C:\xampp\htdocs\store\public\login_desgin" />
-      <recent name="C:\xampp\htdocs\store\public\login" />
     </key>
   </component>
   <component name="RunManager">
@@ -267,6 +275,16 @@
       <workItem from="1606111227140" duration="26512000" />
       <workItem from="1606197114963" duration="8734000" />
       <workItem from="1606284925556" duration="23078000" />
+      <workItem from="1606372303031" duration="4000" />
+      <workItem from="1606381571022" duration="212000" />
+      <workItem from="1606383600028" duration="2000" />
+      <workItem from="1606383864943" duration="14000" />
+      <workItem from="1606388128627" duration="4309000" />
+      <workItem from="1606466848748" duration="4087000" />
+      <workItem from="1606555058741" duration="11156000" />
+      <workItem from="1606634121438" duration="8184000" />
+      <workItem from="1606730397257" duration="11709000" />
+      <workItem from="1606807059249" duration="6581000" />
     </task>
     <servers />
   </component>
@@ -299,6 +317,10 @@
     </state>
     <state x="437" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1344.800@0.0.1344.800" timestamp="1606326408783" />
     <state x="499" y="165" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606285274243" />
+    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1606415093457">
+      <screen x="0" y="0" width="1344" height="800" />
+    </state>
+    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1344.800@0.0.1344.800" timestamp="1606415093457" />
     <state x="453" y="84" key="NewPhpClassDialog" timestamp="1604693886847">
       <screen x="0" y="0" width="1344" height="800" />
     </state>
@@ -311,6 +333,10 @@
       <screen x="0" y="0" width="1344" height="800" />
     </state>
     <state x="166" y="40" key="SettingsEditor/0.0.1344.800@0.0.1344.800" timestamp="1605879130963" />
+    <state width="587" height="451" key="SwitcherDM" timestamp="1606414854811">
+      <screen x="0" y="0" width="1344" height="800" />
+    </state>
+    <state width="587" height="451" key="SwitcherDM/0.0.1344.800@0.0.1344.800" timestamp="1606414854811" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1602446428385">
       <screen x="0" y="0" width="1344" height="800" />
     </state>
@@ -320,11 +346,11 @@
     </state>
     <state x="372" y="181" key="run.anything.popup/0.0.1344.800@0.0.1344.800" timestamp="1604860331623" />
     <state x="425" y="186" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605183829163" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606128262433">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606636799623">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup/0.0.1344.800@0.0.1344.800" timestamp="1605815085274" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606128262433" />
+    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup/0.0.1344.800@0.0.1344.800" timestamp="1606414827698" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606636799623" />
     <state x="395" y="299" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602344344691">
       <screen x="0" y="0" width="1344" height="800" />
     </state>

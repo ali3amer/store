@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Expense;
 use App\Http\Controllers\Controller;
+use App\Update_Expense;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -48,6 +49,7 @@ class ExpenseController extends Controller
         return Expense::create([
             'name' => $request['name'],
             'price' => $request['price'],
+            'user_id' => $request['user_id']
         ]);
     }
 
@@ -85,6 +87,12 @@ class ExpenseController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required'
+        ]);
+        Update_Expense::create([
+            'expense_id' => $expense->id,
+            'name' => $expense->name,
+            'price' => $expense->price,
+            'user_id' => $expense->user_id,
         ]);
         $expense->update($request->all());
     }

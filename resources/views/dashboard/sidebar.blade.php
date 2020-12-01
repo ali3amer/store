@@ -35,10 +35,14 @@
             </li>
         @endif
 
-            @if(Auth::user()->hasRole('super_admin'))
+        @if(Auth::user()->hasRole('super_admin'))
+            <li>
+                <router-link to="/settings">الإعدادات</router-link>
+            </li>
+
                 <li>
-                    <router-link to="/settings">الإعدادات</router-link>
+                    <router-link to="/control">متابعة المستخدمين</router-link>
                 </li>
-            @endif
+        @endif
     </ul>
 </div>

@@ -171,10 +171,10 @@
                         <div class="invoice-box" id="from_to">
 
                             <div class="information text-center">
-                                <h3>نايل</h3>
-                                <div>السوق الكبير</div>
-                                <div>099992871</div>
-                                <div>تقرير من 25-02-2020 / 14-05-2020</div>
+                                <h3>{{ setting.name }}</h3>
+                                <div>{{ setting.location }}</div>
+                                <div>{{ setting.telephones }}</div>
+                                <div>فاتوره رقم : {{ orderId }}</div>
                             </div>
 
                             <div v-for="(row, index) in from_to">
@@ -223,41 +223,11 @@
                         </button>
 
                         <div class="invoice-box" id="myTable">
-                            <div class="top">
-                                <div>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="row">
-                                                    <div class="col-12">رقم الفاتوره #: 123</div>
-                                                    <div class="col-12">التاريخ: January 1, 2015</div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-6 text-right">
-                                                <div class="title">
-                                                    <img src="https://www.sparksuite.com/images/logo.png"
-                                                         style="width:100%; max-width:300px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="information">
-                                <div colspan="2">
-                                    <div>
-                                        <div>
-                                            <div>
-                                                Sparksuite, Inc.<br>
-                                                12345 Sunny Road<br>
-                                                Sunnyville, CA 12345
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="information text-center">
+                                <h3>{{ setting.name }}</h3>
+                                <div>{{ setting.location }}</div>
+                                <div>{{ setting.telephones }}</div>
+                                <div>فاتوره رقم : {{ orderId }}</div>
                             </div>
 
                             <div v-for="(row, index) in rows">
@@ -304,41 +274,12 @@
                         <button class="btn btn btn-primary" @click="printReport('today')"><i class="fa fa-print"></i>
                         </button>
                         <div class="invoice-box" id="today">
-                            <div class="top">
-                                <div>
-                                    <div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="row">
-                                                    <div class="col-12">رقم الفاتوره #: 123</div>
-                                                    <div class="col-12">التاريخ: January 1, 2015</div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-6 text-right">
-                                                <div class="title">
-                                                    <img src="https://www.sparksuite.com/images/logo.png"
-                                                         style="width:100%; max-width:300px;">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="information">
-                                <div colspan="2">
-                                    <div>
-                                        <div>
-                                            <div>
-                                                Sparksuite, Inc.<br>
-                                                12345 Sunny Road<br>
-                                                Sunnyville, CA 12345
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="information text-center">
+                                <h3>{{ setting.name }}</h3>
+                                <div>{{ setting.location }}</div>
+                                <div>{{ setting.telephones }}</div>
+                                <div>فاتوره رقم : {{ orderId }}</div>
                             </div>
 
                             <div v-for="(day, index) in today">
@@ -449,6 +390,7 @@ export default {
             month: '',
             expense: '',
             expenses: {},
+            setting: {},
             expensesSum: '',
             categories: {},
             sumPrice: {},
@@ -595,6 +537,9 @@ export default {
                 this.from_to_form
                     .post("api/" + this.routeName)
                     .then(({data}) => {
+                        this.from_to = {};
+                        this.expenses = {};
+                        this.today = {};
                         this.rows = {};
                         this.from_to = data.categories;
                         this.from_to_sum = data.from_to_sum;
@@ -617,6 +562,10 @@ export default {
                 this.inventory_form
                     .post("api/" + this.routeName)
                     .then(({data}) => {
+                        this.from_to = {};
+                        this.today = {};
+                        this.expenses = {};
+                        this.rows = {};
                         this.from_to = {};
                         this.rows = data.categories;
                         this.sumPrice = data.sumPrice;
@@ -668,6 +617,9 @@ export default {
         axios.get('api/report?date=month').then(({data}) => (this.month = data));
         axios.get('api/report?date=expense').then(({data}) => (this.expense = data));
         this.putCategoryId('all');
+
+        axios.get('api/setting').then(({data}) => (this.setting = data));
+
 
 
     }

@@ -40,7 +40,6 @@ class ProductDetailController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'user_id' => 'required|integer',
             'product_id' => 'required|integer',
             'stock' => 'required',
             'purchase_price' => 'required',
@@ -49,7 +48,6 @@ class ProductDetailController extends Controller
         ]);
 
         $detail = Product_Detail::create([
-            'user_id' => $request['user_id'],
             'product_id' => $request['product_id'],
             'stock' => $request['stock'],
             'purchase_price' => $request['purchase_price'],
@@ -109,7 +107,6 @@ class ProductDetailController extends Controller
     public function update(Request $request, Product_Detail $product_Detail)
     {
         $this->validate($request, [
-            'user_id' => 'required|integer',
             'product_id' => 'required|integer',
             'stock' => 'required',
             'purchase_price' => 'required',
