@@ -105,8 +105,7 @@ class OrderController extends Controller
             $details = Order_Detail::where('order_id', $order->id)->get();
             foreach ($details as $detail) {
                 Update_Order_Details::create([
-                    'update_order_id' => $update_order->id,
-                    'order_id' => $detail['order_id'],
+                    'update__order_id' => $update_order->id,
                     'product_id' => $detail['product_id'],
                     'sale_price' => $detail['sale_price'],
                     'quantity' => $detail['quantity'],

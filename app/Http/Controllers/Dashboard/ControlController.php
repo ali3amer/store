@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Update_Order;
+use App\Update_Order_Details;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class ControlController extends Controller
     public function index(Request $request)
     {
         if ($request->order != null) {
-            return Update_Order::where('order_id', $request->order)->with(['user', 'details'])->paginate(5);
+            return Update_Order::where('order_id', $request->order)->with('update_details.product')->get();
         } else {
             $orders = Update_Order::distinct()->pluck('order_id')->all();
             return Order::whereIn('id', $orders)->paginate(5);

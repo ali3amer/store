@@ -2502,11 +2502,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -47197,92 +47192,73 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-7" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6" }, [
-                _c("h3", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(_vm.title))
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6" }, [
-                _c("input", {
-                  directives: [
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.orders, function(order, index) {
+            return _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("h3", { staticClass: "card-title" }, [
+                    _c("span", [_vm._v("رقم الفاتوره : ")]),
+                    _vm._v(_vm._s(order.order_id))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                  _c(
+                    "table",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.searchClient,
-                      expression: "searchClient"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "بحث ...." },
-                  domProps: { value: _vm.searchClient },
-                  on: {
-                    keyup: _vm.searchResults,
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.searchClient = $event.target.value
-                    }
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c(
-              "table",
-              {
-                staticClass: "table table-bordered table-hover",
-                attrs: { id: "table_id" }
-              },
-              [
-                _vm._m(1),
+                      staticClass: "table table-bordered table-hover",
+                      attrs: { id: "table_id" }
+                    },
+                    [
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.rows.data, function(row, index) {
+                          return _c("tr", { key: row.id }, [
+                            _c("td", [_vm._v(_vm._s(row.id))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showOrder(row.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye red" })]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _c(
-                  "tbody",
-                  _vm._l(_vm.rows.data, function(row, index) {
-                    return _c("tr", { key: row.id }, [
-                      _c("td", [_vm._v(_vm._s(row.id))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.showOrder(row.id)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-eye red" })]
-                        )
-                      ])
-                    ])
-                  }),
-                  0
+                  "div",
+                  { staticClass: "card-footer" },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.rows },
+                      on: { "pagination-change-page": _vm.getResults }
+                    })
+                  ],
+                  1
                 )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-footer" },
-            [
-              _c("pagination", {
-                attrs: { data: _vm.rows },
-                on: { "pagination-change-page": _vm.getResults }
-              })
-            ],
-            1
-          )
-        ])
+              ])
+            ])
+          }),
+          0
+        )
       ])
     ])
   ])

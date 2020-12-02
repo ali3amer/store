@@ -44,40 +44,35 @@
             </div>
 
             <div class="col-7">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <h3 class="card-title">{{ title }}</h3>
+                <div class="row">
+                    <div class="col-12" v-for="(order, index) in orders">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"><span>رقم الفاتوره : </span>{{ order.order_id }}</h3>
                             </div>
-                            <div class="col-6">
-                                <input type="text" placeholder="بحث ...." class="form-control"
-                                       v-model="searchClient" @keyup="searchResults">
+                            <div class="card-body table-responsive p-0">
+                                <table id="table_id" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr class="text-center">
+                                        <th>رقم الفاتوره</th>
+                                        <th>التحكم</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(row, index) in rows.data" :key="row.id">
+                                        <td>{{ row.id }}</td>
+                                        <td>
+                                            <a href="#" @click="showOrder(row.id)"><i class="fa fa-eye red"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer">
+                                <pagination :data="rows" @pagination-change-page="getResults"></pagination>
+
                             </div>
                         </div>
-
-                    </div>
-                    <div class="card-body table-responsive p-0">
-                        <table id="table_id" class="table table-bordered table-hover">
-                            <thead>
-                            <tr class="text-center">
-                                <th>رقم الفاتوره</th>
-                                <th>التحكم</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="(row, index) in rows.data" :key="row.id">
-                                <td>{{ row.id }}</td>
-                                <td>
-                                    <a href="#" @click="showOrder(row.id)"><i class="fa fa-eye red"></i></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer">
-                        <pagination :data="rows" @pagination-change-page="getResults"></pagination>
-
                     </div>
                 </div>
             </div>

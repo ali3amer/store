@@ -13,7 +13,7 @@ class Update_Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function details()
+    public function update_details()
     {
         return $this->hasMany(Update_Order_Details::class);
     }

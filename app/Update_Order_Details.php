@@ -8,7 +8,7 @@ class Update_Order_Details extends Model
 {
     protected $guarded = [];
 
-    public function order()
+    public function update_order()
     {
         return $this->belongsTo(Update_Order::class);
     }

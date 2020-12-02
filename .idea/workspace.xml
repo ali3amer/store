@@ -28,26 +28,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ecf9a02-88ba-438b-bf77-fe47f09329b8" name="Default Changelist" comment="nhnh">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Control.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Expense.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Expense.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ExpenseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ExpenseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ControlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ControlController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ProductDetailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ProductDetailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_083141_create_product__details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_20_083141_create_product__details_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_20_103220_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_20_103220_create_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_13_161041_create_expenses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_13_161041_create_expenses_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Update_Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Update_Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Update_Order_Details.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Update_Order_Details.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_28_093816_create_update__order__details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_093816_create_update__order__details_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Expenses.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Expenses.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Orders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Orders.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Products.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Products.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Reports.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Reports.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Control.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Control.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +272,8 @@
       <workItem from="1606555058741" duration="11156000" />
       <workItem from="1606634121438" duration="8184000" />
       <workItem from="1606730397257" duration="11709000" />
-      <workItem from="1606807059249" duration="6581000" />
+      <workItem from="1606807059249" duration="7835000" />
+      <workItem from="1606916554048" duration="6611000" />
     </task>
     <servers />
   </component>
@@ -337,6 +326,10 @@
       <screen x="0" y="0" width="1344" height="800" />
     </state>
     <state width="587" height="451" key="SwitcherDM/0.0.1344.800@0.0.1344.800" timestamp="1606414854811" />
+    <state x="518" y="300" key="VCS.ChangelistChooser" timestamp="1606938061146">
+      <screen x="0" y="0" width="1344" height="800" />
+    </state>
+    <state x="518" y="300" key="VCS.ChangelistChooser/0.0.1344.800@0.0.1344.800" timestamp="1606938061146" />
     <state width="600" height="440" key="javadoc.popup" timestamp="1602446428385">
       <screen x="0" y="0" width="1344" height="800" />
     </state>

@@ -15,10 +15,8 @@ class CreateUpdateOrderDetailsTable extends Migration
     {
         Schema::create('update__order__details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('update_order_id')->unsigned();
-            $table->foreign('update_order_id')->references('id')->on('update__orders')->onDelete('cascade');
-            $table->integer('order_id')->unsigned();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->integer('update__order_id')->unsigned();
+            $table->foreign('update__order_id')->references('id')->on('update__orders')->onDelete('cascade');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->float('sale_price');
