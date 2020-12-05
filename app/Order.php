@@ -15,6 +15,11 @@ class Order extends Model
         return $this->hasMany(Order_Detail::class);
     }
 
+    public function orders_update()
+    {
+        return $this->hasMany(Update_Order::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -22,6 +27,7 @@ class Order extends Model
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:m',
+        'deleted_at' => 'datetime:Y-m-d H:m',
     ];
 
 

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Expense;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Order_Detail;
+use App\Update_Expense;
 use App\Update_Order;
-use App\Update_Order_Details;
-use App\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -19,80 +20,41 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function ordersIndex(Request $request)
     {
         if ($request->order != null) {
-            return Update_Order::where('order_id', $request->order)->with('update_details.product')->get();
+            return Order::where('id', $request->order)->withTrashed()->with('details.product', 'user')->with('orders_update.update_details.product')->with('orders_update.user')->first();
         } else {
             $orders = Update_Order::distinct()->pluck('order_id')->all();
             return Order::whereIn('id', $orders)->paginate(5);
-
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function deletedOrders(Request $request)
     {
-        //
+
+        if ($request->order != null) {
+            return Order::where('id', $request->order)->withTrashed()->with('details.product')->with('user')->first();
+
+        } else {
+            return Order::onlyTrashed()->with('user')->paginate(5);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function expensesIndex(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if ($request->expense != null) {
+            return Expense::where('id', $request->expense)->withTrashed()->with('user')->with('expenses_update.user')->first();
+        } else {
+            $expenses = Update_Expense::distinct()->pluck('expense_id')->all();
+            return Expense::whereIn('id', $expenses)->with('user')->paginate(5);
+        }
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function deletedExpenses(Request $request)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        return Expense::onlyTrashed()->with('user')->paginate(5);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

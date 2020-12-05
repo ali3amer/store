@@ -19,4 +19,9 @@ class Expense extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function expenses_update()
+    {
+        return $this->hasMany(Update_Expense::class);
+    }
 }

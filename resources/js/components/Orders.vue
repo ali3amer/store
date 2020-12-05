@@ -291,7 +291,7 @@
                                                                         <td>{{ product.name }}</td>
                                                                         <td>{{ product.discount }}</td>
                                                                         <td>{{ product.stock }}</td>
-                                                                        <td>{{ product.sale_price }}</td>
+                                                                        <td>{{ formatPrice(product.sale_price) }}</td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>
@@ -365,7 +365,7 @@
                                         <td>{{ detail_form.order[id].quantity }}</td>
                                         <td>{{ detail_form.order[id].discount }}</td>
                                         <td>{{ detail_form.order[id].sale_price }}</td>
-                                        <td>{{ detail_form.order[id].paid_price }}</td>
+                                        <td>{{ formatPrice(detail_form.order[id].paid_price) }}</td>
                                         <td style="min-width: 90px !important;">
                                             <button class="btn btn-sm btn-danger" @click="deleteFromList(id)"><i
                                                 class="fa fa-minus"></i></button>
@@ -375,26 +375,22 @@
                                 </table>
                             </div>
                             <div class="card-footer" v-if="form.id != ''">
-                                <div class="form-group row">
-                                    <label for="allTotal" class="col-sm-2 col-form-label">الجمله</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" min="1" :value="totalPrice" class="form-control" readonly
-                                               id="allTotal">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="discount" class="col-sm-2 col-form-label">التخفيض</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" min="1" :value="totalDiscount" class="form-control" readonly
-                                               id="allDiscount">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="total" class="col-sm-2 col-form-label">الصافي</label>
-                                    <div class="col-sm-4">
-                                        <input type="number" min="1" :value="price" class="form-control" readonly id="total">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <table class="table">
+                                            <tr>
+                                                <td>الجمله</td>
+                                                <td>{{ formatPrice(totalPrice) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>التخفيض</td>
+                                                <td>{{ formatPrice(totalDiscount) }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>الصافي</td>
+                                                <td>{{ formatPrice(price) }}</td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -449,23 +445,23 @@
                                         <td>{{ detail_form.order[id].quantity }}</td>
                                         <td>{{ detail_form.order[id].sale_price }}</td>
                                         <td>{{ detail_form.order[id].discount }}</td>
-                                        <td>{{ detail_form.order[id].paid_price }}</td>
+                                        <td>{{ formatPrice(detail_form.order[id].paid_price) }}</td>
                                     </tr>
 
                                     <tr class="total heading">
                                         <td colspan="5">الجمله</td>
 
-                                        <td>{{ totalPrice }}</td>
+                                        <td>{{ formatPrice(totalPrice) }}</td>
                                     </tr>
                                     <tr class="total heading">
                                         <td colspan="5">التخفيض</td>
 
-                                        <td>{{ totalDiscount }}</td>
+                                        <td>{{ formatPrice(totalDiscount) }}</td>
                                     </tr>
                                     <tr class="total heading">
                                         <td colspan="5">المدفوع</td>
 
-                                        <td>{{ price }}</td>
+                                        <td>{{ formatPrice(price) }}</td>
                                     </tr>
 
                                 </table>
@@ -833,9 +829,7 @@ export default {
         },
         loadData() {
             this.cancelOrder();
-            // if(this.$gate.isAdminOrAuthor()) {
             axios.get('api/' + this.routeName).then(({data}) => (this.rows = data));
-            // }
         },
         createData() {
             this.editMode = false;
@@ -870,6 +864,7 @@ export default {
             this.totalDiscount = 0;
             this.ids = {};
             this.temps = {};
+            this.rows = {};
 
             this.productList = {};
         }

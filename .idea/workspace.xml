@@ -28,14 +28,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0ecf9a02-88ba-438b-bf77-fe47f09329b8" name="Default Changelist" comment="nhnh">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/store.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/store.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Expense.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Expense.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ControlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ControlController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order_Detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order_Detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Update_Expense.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Update_Expense.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Update_Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Update_Order.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Update_Order_Details.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Update_Order_Details.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_28_093816_create_update__order__details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_093816_create_update__order__details_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Control.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Control.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Orders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Orders.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Reports.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Reports.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +175,9 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/vendor/kkszymanowski/traitor" />
       <path value="$PROJECT_DIR$/vendor/santigarcor/laratrust" />
+      <path value="$PROJECT_DIR$/vendor/spatie/temporary-directory" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-backup" />
+      <path value="$PROJECT_DIR$/vendor/spatie/db-dumper" />
     </include_path>
   </component>
   <component name="ProjectId" id="1iGmPIaAkpGPBTtz4vekSZjno7n" />
@@ -273,7 +288,10 @@
       <workItem from="1606634121438" duration="8184000" />
       <workItem from="1606730397257" duration="11709000" />
       <workItem from="1606807059249" duration="7835000" />
-      <workItem from="1606916554048" duration="6611000" />
+      <workItem from="1606916554048" duration="7211000" />
+      <workItem from="1607002882949" duration="10692000" />
+      <workItem from="1607069433236" duration="11492000" />
+      <workItem from="1607166628825" duration="12242000" />
     </task>
     <servers />
   </component>
@@ -339,10 +357,10 @@
     </state>
     <state x="372" y="181" key="run.anything.popup/0.0.1344.800@0.0.1344.800" timestamp="1604860331623" />
     <state x="425" y="186" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605183829163" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606636799623">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup" timestamp="1607198883716">
+      <screen x="0" y="0" width="1344" height="800" />
     </state>
-    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup/0.0.1344.800@0.0.1344.800" timestamp="1606414827698" />
+    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup/0.0.1344.800@0.0.1344.800" timestamp="1607198883716" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606636799623" />
     <state x="395" y="299" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602344344691">
       <screen x="0" y="0" width="1344" height="800" />

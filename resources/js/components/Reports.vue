@@ -174,7 +174,7 @@
                                 <h3>{{ setting.name }}</h3>
                                 <div>{{ setting.location }}</div>
                                 <div>{{ setting.telephones }}</div>
-                                <div>فاتوره رقم : {{ orderId }}</div>
+                                <div><span>تقرير الفتره من : </span><span>{{ from_to_form.from }}</span><span>الى: </span><span>{{ from_to_form.to }}</span></div>
                             </div>
 
                             <div v-for="(row, index) in from_to">
@@ -326,21 +326,13 @@
                         <button class="btn btn btn-primary" @click="printReport('expenses')"><i class="fa fa-print"></i>
                         </button>
                         <div class="invoice-box" id="expenses">
-
-                            <div class="information text-center">
-                                <h3>{{ setting.name }}</h3>
-                                <div>{{ setting.location }}</div>
-                                <div>{{ setting.telephones }}</div>
-                                <div>فاتوره رقم : {{ orderId }}</div>
-                            </div>
-
                             <h4>المصروفات</h4>
 
                             <table class="table text-center" cellpadding="0" cellspacing="0">
                                 <thead>
                                 <tr class="heading">
                                     <td>الرقم</td>
-                                    <td>إسم المنتج</td>
+                                    <td>البند</td>
                                     <td>المبلغ</td>
                                     <td>التاريخ</td>
                                 </tr>
