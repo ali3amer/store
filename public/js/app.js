@@ -2764,10 +2764,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      editMode: false,
+      orderMode: false,
+      expenseMode: false,
       modalTitle: 'control',
       routeName: 'control',
       title: '',
@@ -2779,6 +2787,10 @@ __webpack_require__.r(__webpack_exports__);
       orders: {},
       deletedOrders: {},
       expenses: {},
+      orderSearch: '',
+      deletedOrderSearch: '',
+      expenseSearch: '',
+      deletedExpenseSearch: '',
       expenseRows: {},
       deletedExpenses: {},
       form: new Form({
@@ -2806,87 +2818,108 @@ __webpack_require__.r(__webpack_exports__);
         _this2.rows = response.data;
       });
     },
-    searchResults: function searchResults() {
+    loadData: function loadData() {
       var _this3 = this;
 
-      if (this.searchClient != '') {
-        axios.get('api/' + this.routeName + '?name=' + this.searchClient).then(function (_ref) {
+      this.orderMode = true;
+      this.expenseMode = false;
+      this.expenseRows = {};
+      this.expenses = {};
+      this.deletedExpenses = {};
+      this.title = 'الفواتير المعدله والمحذوفه';
+
+      if (this.orderSearch != '') {
+        axios.get('api/' + this.routeName + '?search=' + this.orderSearch).then(function (_ref) {
           var data = _ref.data;
           return _this3.rows = data;
         });
-      } else if (this.searchClient == '') {
+      } else {
         axios.get('api/' + this.routeName).then(function (_ref2) {
           var data = _ref2.data;
           return _this3.rows = data;
         });
       }
     },
-    loadData: function loadData() {
+    loadDeletedData: function loadDeletedData() {
       var _this4 = this;
 
-      this.resetData();
-      this.title = 'الفواتير المعدله';
-      axios.get('api/' + this.routeName).then(function (_ref3) {
-        var data = _ref3.data;
-        return _this4.rows = data;
-      });
-    },
-    loadDeletedData: function loadDeletedData() {
-      var _this5 = this;
+      this.expenseRows = {};
+      this.expenses = {};
+      this.deletedExpenses = {};
 
-      this.resetData();
-      this.title = 'الفواتير المحذوفه';
-      axios.get('api/' + this.routeName + '/deleted').then(function (_ref4) {
-        var data = _ref4.data;
-        return _this5.deletedRows = data;
-      });
+      if (this.deletedOrderSearch != '') {
+        axios.get('api/' + this.routeName + '/deleted?search=' + this.deletedOrderSearch).then(function (_ref3) {
+          var data = _ref3.data;
+          return _this4.deletedRows = data;
+        });
+      } else {
+        axios.get('api/' + this.routeName + '/deleted').then(function (_ref4) {
+          var data = _ref4.data;
+          return _this4.deletedRows = data;
+        });
+      }
     },
     loadExpenseData: function loadExpenseData() {
-      var _this6 = this;
+      var _this5 = this;
 
-      this.resetData();
-      this.title = 'المصروفات المحذوفه والمعدله';
-      axios.get('api/' + this.routeName + '/expenses').then(function (_ref5) {
-        var data = _ref5.data;
-        return _this6.expenseRows = data;
-      });
-      axios.get('api/' + this.routeName + '/deletedExpenses').then(function (_ref6) {
-        var data = _ref6.data;
-        return _this6.deletedExpenses = data;
-      });
-    },
-    showOrder: function showOrder(id) {
-      var _this7 = this;
-
-      axios.get('api/' + this.routeName + '?order=' + id).then(function (_ref7) {
-        var data = _ref7.data;
-        return _this7.orders = data;
-      });
-    },
-    showDeletedOrder: function showDeletedOrder(id) {
-      var _this8 = this;
-
-      axios.get('api/' + this.routeName + '/deleted?order=' + id).then(function (_ref8) {
-        var data = _ref8.data;
-        return _this8.deletedOrders = data;
-      });
-    },
-    showExpense: function showExpense(id) {
-      var _this9 = this;
-
-      axios.get('api/' + this.routeName + '/expenses?expense=' + id).then(function (_ref9) {
-        var data = _ref9.data;
-        return _this9.expenses = data;
-      });
-    },
-    resetData: function resetData() {
+      this.orderMode = false;
+      this.expenseMode = true;
       this.orders = {};
       this.deletedRows = {};
       this.rows = {};
       this.deletedOrders = {};
-      this.expenseRows = {};
-      this.expenses = {};
-      this.deletedExpenses = {};
+      this.title = 'المصروفات المحذوفه والمعدله';
+
+      if (this.expenseSearch != '') {
+        axios.get('api/' + this.routeName + '/expenses?search=' + this.expenseSearch).then(function (_ref5) {
+          var data = _ref5.data;
+          return _this5.expenseRows = data;
+        });
+      } else {
+        axios.get('api/' + this.routeName + '/expenses').then(function (_ref6) {
+          var data = _ref6.data;
+          return _this5.expenseRows = data;
+        });
+      }
+    },
+    loadDeletedExpenseData: function loadDeletedExpenseData() {
+      var _this6 = this;
+
+      this.orderMode = false;
+      this.expenseMode = true;
+      this.orders = {};
+      this.deletedRows = {};
+      this.rows = {};
+      this.deletedOrders = {};
+      this.title = 'المصروفات المحذوفه والمعدله';
+
+      if (this.deletedExpenseSearch != '') {
+        axios.get('api/' + this.routeName + '/deletedExpenses?search=' + this.deletedExpenseSearch).then(function (_ref7) {
+          var data = _ref7.data;
+          return _this6.deletedExpenses = data;
+        });
+      } else {
+        axios.get('api/' + this.routeName + '/deletedExpenses').then(function (_ref8) {
+          var data = _ref8.data;
+          return _this6.deletedExpenses = data;
+        });
+      }
+    },
+    showOrder: function showOrder(id) {
+      var _this7 = this;
+
+      axios.get('api/' + this.routeName + '?order=' + id).then(function (_ref9) {
+        var data = _ref9.data;
+        return _this7.orders = data;
+      });
+    },
+    showExpense: function showExpense(id) {
+      var _this8 = this;
+
+      axios.get('api/' + this.routeName + '/expenses?expense=' + id).then(function (_ref10) {
+        var data = _ref10.data;
+        return _this8.expenses = data;
+      });
     }
   },
   created: function created() {//
@@ -3199,6 +3232,28 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5202,6 +5257,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5396,7 +5452,7 @@ __webpack_require__.r(__webpack_exports__);
 
           toast.fire({
             icon: "success",
-            title: "تم الحفظ بنجاح"
+            title: "تم جلب البيانات بنجاح"
           });
 
           _this6.$Progress.finish();
@@ -5419,7 +5475,7 @@ __webpack_require__.r(__webpack_exports__);
 
           toast.fire({
             icon: "success",
-            title: "تم الحفظ بنجاح"
+            title: "تم جلب البيانات بنجاح"
           });
 
           _this6.$Progress.finish();
@@ -5441,7 +5497,7 @@ __webpack_require__.r(__webpack_exports__);
 
           toast.fire({
             icon: "success",
-            title: "تم الحفظ بنجاح"
+            title: "تم جلب البيانات بنجاح"
           });
 
           _this6.$Progress.finish();
@@ -47339,7 +47395,8 @@ var render = function() {
                     staticClass: "btn btn-info",
                     on: {
                       click: function($event) {
-                        return _vm.loadData()
+                        _vm.loadData()
+                        _vm.loadDeletedData()
                       }
                     }
                   },
@@ -47349,23 +47406,11 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-danger",
-                    on: {
-                      click: function($event) {
-                        return _vm.loadDeletedData()
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fa fa-trash" })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
                     staticClass: "btn btn-success",
                     on: {
                       click: function($event) {
-                        return _vm.loadExpenseData()
+                        _vm.loadExpenseData()
+                        _vm.loadDeletedExpenseData()
                       }
                     }
                   },
@@ -47383,356 +47428,409 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-5" }, [
         _c("div", { staticClass: "row" }, [
-          Object.keys(_vm.rows).length != 0
-            ? _c("div", { staticClass: "col-12" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.searchClient,
-                              expression: "searchClient"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "بحث ...." },
-                          domProps: { value: _vm.searchClient },
-                          on: {
-                            keyup: _vm.searchResults,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.searchClient = $event.target.value
-                            }
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.orderMode,
+                  expression: "orderMode"
+                }
+              ],
+              staticClass: "col-12"
+            },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.orderSearch,
+                            expression: "orderSearch"
                           }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-bordered table-hover" },
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.rows.data, function(row, index) {
-                            return _c("tr", { key: row.id }, [
-                              _c("td", [_vm._v(_vm._s(row.id))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.created_at))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showOrder(row.id)
-                                      }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-eye red" })]
-                                )
-                              ])
-                            ])
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-footer" },
-                    [
-                      _c("pagination", {
-                        attrs: { data: _vm.rows },
-                        on: { "pagination-change-page": _vm.getResults }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          Object.keys(_vm.deletedRows).length != 0
-            ? _c("div", { staticClass: " col-12" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.searchClient,
-                              expression: "searchClient"
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "بحث ...." },
+                        domProps: { value: _vm.orderSearch },
+                        on: {
+                          keyup: function($event) {
+                            return _vm.loadData()
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "بحث ...." },
-                          domProps: { value: _vm.searchClient },
-                          on: {
-                            keyup: _vm.searchResults,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.searchClient = $event.target.value
-                            }
+                            _vm.orderSearch = $event.target.value
                           }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-bordered table-hover" },
-                      [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.deletedRows.data, function(row, index) {
-                            return _c("tr", { key: row.id }, [
-                              _c("td", [_vm._v(_vm._s(row.id))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.created_at))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showOrder(row.id)
-                                      }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-eye red" })]
-                                )
-                              ])
-                            ])
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-footer" },
-                    [
-                      _c("pagination", {
-                        attrs: { data: _vm.deletedRows },
-                        on: { "pagination-change-page": _vm.getDeletedResults }
+                        }
                       })
-                    ],
-                    1
-                  )
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          Object.keys(_vm.expenseRows).length != 0
-            ? _c("div", { staticClass: "col-12 mb-2" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _vm._m(2),
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-bordered table-hover" },
+                    [
+                      _vm._m(0),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.searchClient,
-                              expression: "searchClient"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "بحث ...." },
-                          domProps: { value: _vm.searchClient },
-                          on: {
-                            keyup: _vm.searchResults,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.searchClient = $event.target.value
-                            }
-                          }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-bordered table-hover" },
-                      [
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.expenseRows.data, function(row, index) {
-                            return _c("tr", { key: row.id }, [
-                              _c("td", [_vm._v(_vm._s(row.user.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.price))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.created_at))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showExpense(row.id)
-                                      }
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.rows.data, function(row, index) {
+                          return _c("tr", { key: row.id }, [
+                            _c("td", [_vm._v(_vm._s(row.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.created_at))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showOrder(row.id)
                                     }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-eye red" })]
-                                )
-                              ])
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye red" })]
+                              )
                             ])
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-footer" },
-                    [
-                      _c("pagination", {
-                        attrs: { data: _vm.expenseRows },
-                        on: { "pagination-change-page": _vm.getResults }
-                      })
-                    ],
-                    1
+                          ])
+                        }),
+                        0
+                      )
+                    ]
                   )
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-footer" },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.rows },
+                      on: { "pagination-change-page": _vm.getResults }
+                    })
+                  ],
+                  1
+                )
               ])
-            : _vm._e(),
+            ]
+          ),
           _vm._v(" "),
-          Object.keys(_vm.deletedExpenses).length != 0
-            ? _c("div", { staticClass: "col-12" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-6" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.searchClient,
-                              expression: "searchClient"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "text", placeholder: "بحث ...." },
-                          domProps: { value: _vm.searchClient },
-                          on: {
-                            keyup: _vm.searchResults,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.searchClient = $event.target.value
-                            }
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.orderMode,
+                  expression: "orderMode"
+                }
+              ],
+              staticClass: " col-12"
+            },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.deletedOrderSearch,
+                            expression: "deletedOrderSearch"
                           }
-                        })
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body table-responsive p-0" }, [
-                    _c(
-                      "table",
-                      { staticClass: "table table-bordered table-hover" },
-                      [
-                        _vm._m(5),
-                        _vm._v(" "),
-                        _c(
-                          "tbody",
-                          _vm._l(_vm.deletedExpenses.data, function(
-                            row,
-                            index
-                          ) {
-                            return _c("tr", { key: row.id }, [
-                              _c("td", [_vm._v(_vm._s(row.user.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.name))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.price))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(row.created_at))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showExpense(row.id)
-                                      }
-                                    }
-                                  },
-                                  [_c("i", { staticClass: "fa fa-eye red" })]
-                                )
-                              ])
-                            ])
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-footer" },
-                    [
-                      _c("pagination", {
-                        attrs: { data: _vm.expenseRows },
-                        on: { "pagination-change-page": _vm.getResults }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "بحث ...." },
+                        domProps: { value: _vm.deletedOrderSearch },
+                        on: {
+                          keyup: function($event) {
+                            return _vm.loadDeletedData()
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.deletedOrderSearch = $event.target.value
+                          }
+                        }
                       })
-                    ],
-                    1
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-bordered table-hover" },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.deletedRows.data, function(row, index) {
+                          return _c("tr", { key: row.id }, [
+                            _c("td", [_vm._v(_vm._s(row.id))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.created_at))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showOrder(row.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye red" })]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
                   )
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-footer" },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.deletedRows },
+                      on: { "pagination-change-page": _vm.getDeletedResults }
+                    })
+                  ],
+                  1
+                )
               ])
-            : _vm._e()
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.expenseMode,
+                  expression: "expenseMode"
+                }
+              ],
+              staticClass: "col-12 mb-2"
+            },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.expenseSearch,
+                            expression: "expenseSearch"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "بحث ...." },
+                        domProps: { value: _vm.expenseSearch },
+                        on: {
+                          keyup: function($event) {
+                            return _vm.loadExpenseData()
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.expenseSearch = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-bordered table-hover" },
+                    [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.expenseRows.data, function(row, index) {
+                          return _c("tr", { key: row.id }, [
+                            _c("td", [_vm._v(_vm._s(row.user.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.price))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.created_at))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showExpense(row.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye red" })]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-footer" },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.expenseRows },
+                      on: { "pagination-change-page": _vm.getResults }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.expenseMode,
+                  expression: "expenseMode"
+                }
+              ],
+              staticClass: "col-12"
+            },
+            [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.deletedExpenseSearch,
+                            expression: "deletedExpenseSearch"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "بحث ...." },
+                        domProps: { value: _vm.deletedExpenseSearch },
+                        on: {
+                          keyup: function($event) {
+                            return _vm.loadDeletedExpenseData()
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.deletedExpenseSearch = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                  _c(
+                    "table",
+                    { staticClass: "table table-bordered table-hover" },
+                    [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.deletedExpenses.data, function(row, index) {
+                          return _c("tr", { key: row.id }, [
+                            _c("td", [_vm._v(_vm._s(row.user.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.name))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.price))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(row.created_at))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showExpense(row.id)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye red" })]
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-footer" },
+                  [
+                    _c("pagination", {
+                      attrs: { data: _vm.expenseRows },
+                      on: { "pagination-change-page": _vm.getResults }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -49091,7 +49189,11 @@ var render = function() {
                                                     }
                                                   }
                                                 },
-                                                [_vm._v("كل الأقسام")]
+                                                [
+                                                  _vm._v(
+                                                    "كل الأقسام\n                                                                    "
+                                                  )
+                                                ]
                                               )
                                             ]),
                                             _vm._v(" "),
@@ -49113,7 +49215,7 @@ var render = function() {
                                                     _c("td", [
                                                       _vm._v(
                                                         _vm._s(category.name) +
-                                                          "\n                                                                        "
+                                                          "\n                                                                    "
                                                       )
                                                     ])
                                                   ]
@@ -49323,7 +49425,7 @@ var render = function() {
                                                   _c("td", [
                                                     _vm._v(
                                                       _vm._s(client.name) +
-                                                        "\n                                                                        "
+                                                        "\n                                                                    "
                                                     )
                                                   ])
                                                 ]
@@ -49975,7 +50077,7 @@ var staticRenderFns = [
         { staticStyle: { width: "15% !important" }, attrs: { scope: "col" } },
         [
           _vm._v(
-            "\n                                                                            التخفيض\n                                                                        "
+            "\n                                                                        التخفيض\n                                                                    "
           )
         ]
       ),
@@ -52014,7 +52116,9 @@ var render = function() {
                       _c("div", [
                         _c("span", [_vm._v("تقرير الفتره من : ")]),
                         _c("span", [_vm._v(_vm._s(_vm.from_to_form.from))]),
+                        _vm._v(" "),
                         _c("span", [_vm._v("الى: ")]),
+                        _vm._v(" "),
                         _c("span", [_vm._v(_vm._s(_vm.from_to_form.to))])
                       ])
                     ]),

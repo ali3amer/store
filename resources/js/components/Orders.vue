@@ -10,14 +10,18 @@
                                 <input type="text" class="form-control text-center" v-model="form.id" disabled>
                             </div>
                             <div class="col-6">
-                                <button v-if="'create_orders' in allPermissions" class="btn btn-primary" :disabled="form.id != ''" @click="createData()"><i
+                                <button v-if="'create_orders' in allPermissions" class="btn btn-primary"
+                                        :disabled="form.id != ''" @click="createData()"><i
                                     class="fa fa-plus"></i></button>
-                                <button class="btn btn-success" :disabled="form.id == ''" @click="editMode == true ? saveOrder('edit') : saveOrder('new')"><i
+                                <button class="btn btn-success" :disabled="form.id == ''"
+                                        @click="editMode == true ? saveOrder('edit') : saveOrder('new')"><i
                                     class="fa fa-save"></i></button>
-                                <button v-if="'update_orders' in allPermissions" class="btn btn-info" @click="loadData()" data-toggle="modal"
+                                <button v-if="'update_orders' in allPermissions" class="btn btn-info"
+                                        @click="loadData()" data-toggle="modal"
                                         :disabled="form.id != ''"
                                         data-target="#edit-order"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" :disabled="form.id == ''" @click="cancelOrder()"><i class="fa fa-close"></i></button>
+                                <button class="btn btn-danger" :disabled="form.id == ''" @click="cancelOrder()"><i
+                                    class="fa fa-close"></i></button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="edit-order" tabindex="-1"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +60,7 @@
                                                                        class="table table-striped table-hover">
                                                                     <tr>
                                                                         <th scope="col">#</th>
-<!--                                                                        <th scope="col">الباركود</th>-->
+                                                                        <!--                                                                        <th scope="col">الباركود</th>-->
                                                                         <th scope="col">إسم المنتج</th>
                                                                         <th scope="col">الكميه</th>
                                                                         <th scope="col" style="width: 15% !important;">
@@ -67,10 +71,10 @@
                                                                     <tr v-for="(detail, index) in orderDetails"
                                                                         @click="editModal(orderDetails)">
                                                                         <td>{{ index }}</td>
-<!--                                                                        <td>{{-->
-<!--                                                                                products[detail.product_id].barcode-->
-<!--                                                                            }}-->
-<!--                                                                        </td>-->
+                                                                        <!--                                                                        <td>{{-->
+                                                                        <!--                                                                                products[detail.product_id].barcode-->
+                                                                        <!--                                                                            }}-->
+                                                                        <!--                                                                        </td>-->
                                                                         <td>{{ detail.name }}</td>
                                                                         <td>{{ detail.quantity }}</td>
                                                                         <td>{{ detail.discount }}</td>
@@ -85,14 +89,16 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <pagination :data="rows" @pagination-change-page="getResults"></pagination>
+                                                <pagination :data="rows"
+                                                            @pagination-change-page="getResults"></pagination>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-3 text-right">
-                                <button v-if="'delete_orders' in allPermissions" class="btn btn-danger" :disabled="form.id == ''" @click="deleteData(form.id)"><i
+                                <button v-if="'delete_orders' in allPermissions" class="btn btn-danger"
+                                        :disabled="form.id == ''" @click="deleteData(form.id)"><i
                                     class="fa fa-trash"></i></button>
                             </div>
                         </div>
@@ -117,10 +123,11 @@
                                                    placeholder="">
 
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-sm btn-primary"  type="button" data-toggle="modal"
-                                                      :disabled="form.id == ''"  data-target="#category-search"><i
+                                                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal"
+                                                        :disabled="form.id == ''" data-target="#category-search"><i
                                                     class="fa fa-search"></i></button>
-                                                <div class="modal fade" id="category-search" tabindex="-1" aria-hidden="true">
+                                                <div class="modal fade" id="category-search" tabindex="-1"
+                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-sm">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -144,7 +151,8 @@
                                                                     </thead>
                                                                     <tbody>
                                                                     <tr>
-                                                                        <td @click="putCategoryId('all')">كل الأقسام</td>
+                                                                        <td @click="putCategoryId('all')">كل الأقسام
+                                                                        </td>
                                                                     </tr>
                                                                     <tr v-for="(category, index) in categories.data"
                                                                         @click="putCategoryId(category)">
@@ -160,7 +168,8 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                                <pagination :data="categories" @pagination-change-page="getCategoryResults"></pagination>
+                                                                <pagination :data="categories"
+                                                                            @pagination-change-page="getCategoryResults"></pagination>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -173,7 +182,8 @@
                                 <div class="form-group row">
                                     <label for="username" class="col-sm-4 col-form-label">المستخدم</label>
                                     <div class="col-sm-8">
-                                        <input type="text" :value="auth_name" readonly class="form-control" id="username">
+                                        <input type="text" :value="auth_name" readonly class="form-control"
+                                               id="username">
                                     </div>
                                 </div>
 
@@ -188,9 +198,10 @@
 
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-sm btn-primary" type="button" data-toggle="modal"
-                                                       :disabled="form.id == ''" data-target="#client-search"><i
+                                                        :disabled="form.id == ''" data-target="#client-search"><i
                                                     class="fa fa-search"></i></button>
-                                                <div class="modal fade" id="client-search" tabindex="-1" aria-hidden="true">
+                                                <div class="modal fade" id="client-search" tabindex="-1"
+                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-sm">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -230,7 +241,8 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                                <pagination :data="clients" @pagination-change-page="getClientResults"></pagination>
+                                                                <pagination :data="clients"
+                                                                            @pagination-change-page="getClientResults"></pagination>
 
                                                             </div>
 
@@ -252,19 +264,22 @@
                                     <label for="barcode" class="col-sm-4 col-form-label">الباركود</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
-                                            <input type="text" id="barcode" readonly v-model="productName" class="form-control"
+                                            <input type="text" id="barcode" readonly v-model="productName"
+                                                   class="form-control"
                                                    autofocus
                                                    placeholder="الباركود أو الإسم">
 
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-sm btn-primary" type="button" data-toggle="modal"
-                                                       :disabled="form.id == ''" data-target="#barcode-search"><i
+                                                        :disabled="form.id == ''" data-target="#barcode-search"><i
                                                     class="fa fa-search"></i></button>
-                                                <div class="modal fade" id="barcode-search" tabindex="-1" aria-hidden="true">
+                                                <div class="modal fade" id="barcode-search" tabindex="-1"
+                                                     aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <input type="text" v-model="productSearch" name="productSearch"
+                                                                <input type="text" v-model="productSearch"
+                                                                       name="productSearch"
                                                                        id="searchProduct" @keyup="searchProduct()"
                                                                        class="form-control"
                                                                        placeholder="الباركود أو إسم المنتج">
@@ -300,7 +315,8 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                                <pagination :data="products" @pagination-change-page="getProductResults"></pagination>
+                                                                <pagination :data="products"
+                                                                            @pagination-change-page="getProductResults"></pagination>
 
                                                             </div>
 
@@ -315,18 +331,22 @@
                                 <div class="form-group row">
                                     <label for="quantity" class="col-sm-4 col-form-label">الكميه</label>
                                     <div class="col-sm-8">
-                                        <input type="number" min="1" :max="maxQuantity" v-model="quantity" class="form-control" id="quantity">
+                                        <input type="number" min="1" :max="maxQuantity" v-model="quantity"
+                                               class="form-control" id="quantity">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="discount" class="col-sm-4 col-form-label">التخفيض</label>
                                     <div class="col-sm-4">
-                                        <input type="number" min="1" v-model="discount" :placeholder="currentProduct.discount"
+                                        <input type="number" min="1" v-model="discount"
+                                               :placeholder="currentProduct.discount"
                                                class="form-control" id="discount">
                                     </div>
                                     <div class="col-sm-4">
-                                        <button :disabled="form.id == '' || currentProduct.stock <= 0" class="btn btn-primary" @click="productName != '' ? putOrderList(currentProduct) : ''"><span><i
+                                        <button :disabled="form.id == '' || currentProduct.stock <= 0"
+                                                class="btn btn-primary"
+                                                @click="productName != '' ? putOrderList(currentProduct) : ''"><span><i
                                             class="fa fa-shopping-cart"></i></span>
                                             <span></span></button>
                                     </div>
@@ -404,14 +424,16 @@
         <!---------------------->
 
         <div id="">
-            <div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                 aria-hidden="true">
 
                 <div class="modal-dialog modal-lg">
 
                     <!-- Modal Content: begins -->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                         </div>
                         <!-- Modal Header -->
 
@@ -470,7 +492,8 @@
 
                         <!-- Modal Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" @click="printReport('printThis')"><i class="fa fa-print"></i></button>
+                            <button type="button" class="btn btn-primary" @click="printReport('printThis')"><i
+                                class="fa fa-print"></i></button>
                         </div>
 
                     </div>
@@ -479,7 +502,6 @@
                 </div>
             </div>
         </div>
-
 
 
     </div>
@@ -700,7 +722,7 @@ export default {
                 }
                 this.detail_form.order[product.id].paid_price = (this.detail_form.order[product.id].sale_price * this.detail_form.order[product.id].quantity) - this.detail_form.order[product.id].discount;
                 this.totalDiscount += parseInt(this.discount, 10);
-                this.totalPrice += parseInt(this.detail_form.order[product.id].sale_price,10) * parseInt(this.quantity,10);
+                this.totalPrice += parseInt(this.detail_form.order[product.id].sale_price, 10) * parseInt(this.quantity, 10);
                 this.price = this.totalPrice - this.totalDiscount;
             }
 

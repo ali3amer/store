@@ -7,9 +7,10 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-2">
-                                <button @click="loadData()" class="btn btn-info"><i class="fa fa-edit"></i></button>
-                                <button @click="loadDeletedData()" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                <button  @click="loadExpenseData()" class="btn btn-success"><i class="fa fa-money"></i></button>
+                                <button @click="loadData(); loadDeletedData();" class="btn btn-info"><i
+                                    class="fa fa-edit"></i></button>
+                                <button @click="loadExpenseData(); loadDeletedExpenseData();" class="btn btn-success"><i
+                                    class="fa fa-money"></i></button>
                             </div>
                             <div class="col-8">
                                 <h3>{{ title }}</h3>
@@ -21,13 +22,13 @@
 
             <div class="col-5">
                 <div class="row">
-                    <div class="col-12" v-if="Object.keys(rows).length != 0">
+                    <div class="col-12" v-show="orderMode">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-6">
                                         <input type="text" placeholder="بحث ...." class="form-control"
-                                               v-model="searchClient" @keyup="searchResults">
+                                               v-model="orderSearch" @keyup="loadData()">
                                     </div>
                                 </div>
 
@@ -59,13 +60,13 @@
                         </div>
                     </div>
 
-                    <div class=" col-12" v-if="Object.keys(deletedRows).length != 0">
+                    <div class=" col-12" v-show="orderMode">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-6">
                                         <input type="text" placeholder="بحث ...." class="form-control"
-                                               v-model="searchClient" @keyup="searchResults">
+                                               v-model="deletedOrderSearch" @keyup="loadDeletedData()">
                                     </div>
                                 </div>
 
@@ -91,13 +92,14 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <pagination :data="deletedRows" @pagination-change-page="getDeletedResults"></pagination>
+                                <pagination :data="deletedRows"
+                                            @pagination-change-page="getDeletedResults"></pagination>
 
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 mb-2" v-if="Object.keys(expenseRows).length != 0">
+                    <div class="col-12 mb-2" v-show="expenseMode">
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
@@ -106,7 +108,7 @@
                                     </div>
                                     <div class="col-6">
                                         <input type="text" placeholder="بحث ...." class="form-control"
-                                               v-model="searchClient" @keyup="searchResults">
+                                               v-model="expenseSearch" @keyup="loadExpenseData()">
                                     </div>
                                 </div>
 
@@ -142,15 +144,16 @@
                         </div>
                     </div>
 
-                    <div class="col-12" v-if="Object.keys(deletedExpenses).length != 0">
+                    <div class="col-12" v-show="expenseMode">
                         <div class="card">
                             <div class="card-header">
-                                <div class="row"><div class="col-6">
-                                    <h4>المصروفات المحذوفه</h4>
-                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h4>المصروفات المحذوفه</h4>
+                                    </div>
                                     <div class="col-6">
                                         <input type="text" placeholder="بحث ...." class="form-control"
-                                               v-model="searchClient" @keyup="searchResults">
+                                               v-model="deletedExpenseSearch" @keyup="loadDeletedExpenseData()">
                                     </div>
                                 </div>
 
@@ -195,7 +198,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-4"><h4 class="card-title"><span>رقم الفاتوره : </span>{{ orders.id }}</h4></div>
+                                    <div class="col-4"><h4 class="card-title"><span>رقم الفاتوره : </span>{{
+                                            orders.id
+                                        }}</h4></div>
                                     <div class="col-5"><span>التاريخ : </span>{{ orders.created_at }}</div>
                                     <div class="col-3"><span>المستخدم : </span>{{ orders.user.name }}</div>
                                 </div>
@@ -229,7 +234,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-4"><h4 class="card-title"><span>رقم الفاتوره : </span>{{ order.order_id }}</h4></div>
+                                    <div class="col-4"><h4 class="card-title">
+                                        <span>رقم الفاتوره : </span>{{ order.order_id }}</h4></div>
                                     <div class="col-5"><span>التاريخ : </span>{{ order.created_at }}</div>
                                     <div class="col-3"><span>المستخدم : </span>{{ order.user.name }}</div>
                                 </div>
@@ -267,7 +273,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-4"><h4 class="card-title"><span>رقم الفاتوره : </span>{{ deletedOrders.id }}</h4></div>
+                                    <div class="col-4"><h4 class="card-title">
+                                        <span>رقم الفاتوره : </span>{{ deletedOrders.id }}</h4></div>
                                     <div class="col-5"><span>التاريخ : </span>{{ deletedOrders.deleted_at }}</div>
                                     <div class="col-3"><span>المستخدم : </span>{{ deletedOrders.user.name }}</div>
                                 </div>
@@ -347,7 +354,8 @@
 export default {
     data() {
         return {
-            editMode: false,
+            orderMode: false,
+            expenseMode: false,
             modalTitle: 'control',
             routeName: 'control',
             title: '',
@@ -359,6 +367,10 @@ export default {
             orders: {},
             deletedOrders: {},
             expenses: {},
+            orderSearch: '',
+            deletedOrderSearch: '',
+            expenseSearch: '',
+            deletedExpenseSearch: '',
             expenseRows: {},
             deletedExpenses: {},
             form: new Form({
@@ -382,55 +394,69 @@ export default {
                     this.rows = response.data;
                 });
         },
-        searchResults() {
-            if (this.searchClient != '') {
-                axios.get('api/' + this.routeName + '?name=' + this.searchClient).then(({data}) => (this.rows = data));
-            } else if (this.searchClient == '') {
+
+        loadData() {
+            this.orderMode = true;
+            this.expenseMode = false;
+            this.expenseRows = {};
+            this.expenses = {};
+            this.deletedExpenses = {};
+
+            this.title = 'الفواتير المعدله والمحذوفه';
+            if (this.orderSearch != '') {
+                axios.get('api/' + this.routeName + '?search=' + this.orderSearch).then(({data}) => (this.rows = data));
+            } else {
                 axios.get('api/' + this.routeName).then(({data}) => (this.rows = data));
             }
         },
-
-
-        loadData() {
-            this.resetData();
-
-            this.title = 'الفواتير المعدله';
-
-            axios.get('api/' + this.routeName).then(({data}) => (this.rows = data));
-        },
         loadDeletedData() {
-            this.resetData();
+            this.expenseRows = {};
+            this.expenses = {};
+            this.deletedExpenses = {};
 
-            this.title = 'الفواتير المحذوفه';
-            axios.get('api/' + this.routeName + '/deleted').then(({data}) => (this.deletedRows = data));
+            if (this.deletedOrderSearch != '') {
+                axios.get('api/' + this.routeName + '/deleted?search=' + this.deletedOrderSearch).then(({data}) => (this.deletedRows = data));
+            } else {
+                axios.get('api/' + this.routeName + '/deleted').then(({data}) => (this.deletedRows = data));
+            }
         },
         loadExpenseData() {
-            this.resetData();
+            this.orderMode = false;
+            this.expenseMode = true;
+            this.orders = {};
+            this.deletedRows = {};
+            this.rows = {};
+            this.deletedOrders = {};
+
             this.title = 'المصروفات المحذوفه والمعدله';
-            axios.get('api/' + this.routeName + '/expenses').then(({data}) => (this.expenseRows = data));
+            if (this.expenseSearch != '') {
+                axios.get('api/' + this.routeName + '/expenses?search=' + this.expenseSearch).then(({data}) => (this.expenseRows = data));
+            } else {
+                axios.get('api/' + this.routeName + '/expenses').then(({data}) => (this.expenseRows = data));
+            }
+        },
+        loadDeletedExpenseData() {
+            this.orderMode = false;
+            this.expenseMode = true;
+            this.orders = {};
+            this.deletedRows = {};
+            this.rows = {};
+            this.deletedOrders = {};
 
-            axios.get('api/' + this.routeName + '/deletedExpenses').then(({data}) => (this.deletedExpenses = data));
-
+            this.title = 'المصروفات المحذوفه والمعدله';
+            if (this.deletedExpenseSearch != '') {
+                axios.get('api/' + this.routeName + '/deletedExpenses?search=' + this.deletedExpenseSearch).then(({data}) => (this.deletedExpenses = data));
+            } else {
+                axios.get('api/' + this.routeName + '/deletedExpenses').then(({data}) => (this.deletedExpenses = data));
+            }
         },
         showOrder(id) {
             axios.get('api/' + this.routeName + '?order=' + id).then(({data}) => (this.orders = data));
-        },
-        showDeletedOrder(id) {
-            axios.get('api/' + this.routeName + '/deleted?order=' + id).then(({data}) => (this.deletedOrders = data));
         },
 
         showExpense(id) {
             axios.get('api/' + this.routeName + '/expenses?expense=' + id).then(({data}) => (this.expenses = data));
         },
-        resetData() {
-            this.orders = {};
-            this.deletedRows = {};
-            this.rows = {};
-            this.deletedOrders = {};
-            this.expenseRows = {};
-            this.expenses = {};
-            this.deletedExpenses = {};
-        }
 
     },
     created() {

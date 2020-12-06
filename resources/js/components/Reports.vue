@@ -174,7 +174,8 @@
                                 <h3>{{ setting.name }}</h3>
                                 <div>{{ setting.location }}</div>
                                 <div>{{ setting.telephones }}</div>
-                                <div><span>تقرير الفتره من : </span><span>{{ from_to_form.from }}</span><span>الى: </span><span>{{ from_to_form.to }}</span></div>
+                                <div><span>تقرير الفتره من : </span><span>{{ from_to_form.from }}</span>
+                                    <span>الى: </span> <span>{{ from_to_form.to }}</span></div>
                             </div>
 
                             <div v-for="(row, index) in from_to">
@@ -540,7 +541,7 @@ export default {
                         // this.sumStock = data.sumStock;
                         toast.fire({
                             icon: "success",
-                            title: "تم الحفظ بنجاح"
+                            title: "تم جلب البيانات بنجاح"
                         });
                         this.$Progress.finish();
                     })
@@ -564,7 +565,7 @@ export default {
                         // this.sumStock = data.sumStock;
                         toast.fire({
                             icon: "success",
-                            title: "تم الحفظ بنجاح"
+                            title: "تم جلب البيانات بنجاح"
                         });
                         this.$Progress.finish();
                     })
@@ -588,7 +589,7 @@ export default {
                         // this.sumStock = data.sumStock;
                         toast.fire({
                             icon: "success",
-                            title: "تم الحفظ بنجاح"
+                            title: "تم جلب البيانات بنجاح"
                         });
                         this.$Progress.finish();
                     })
@@ -611,7 +612,6 @@ export default {
         this.putCategoryId('all');
 
         axios.get('api/setting').then(({data}) => (this.setting = data));
-
 
 
     }
