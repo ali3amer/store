@@ -2771,6 +2771,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -47445,6 +47451,8 @@ var render = function() {
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
                   _c("div", { staticClass: "row" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
                     _c("div", { staticClass: "col-6" }, [
                       _c("input", {
                         directives: [
@@ -47479,7 +47487,7 @@ var render = function() {
                     "table",
                     { staticClass: "table table-bordered table-hover" },
                     [
-                      _vm._m(0),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -47543,6 +47551,8 @@ var render = function() {
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
                   _c("div", { staticClass: "row" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
                     _c("div", { staticClass: "col-6" }, [
                       _c("input", {
                         directives: [
@@ -47577,7 +47587,7 @@ var render = function() {
                     "table",
                     { staticClass: "table table-bordered table-hover" },
                     [
-                      _vm._m(1),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -47641,7 +47651,7 @@ var render = function() {
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
                   _c("div", { staticClass: "row" }, [
-                    _vm._m(2),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-6" }, [
                       _c("input", {
@@ -47677,7 +47687,7 @@ var render = function() {
                     "table",
                     { staticClass: "table table-bordered table-hover" },
                     [
-                      _vm._m(3),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -47745,7 +47755,7 @@ var render = function() {
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
                   _c("div", { staticClass: "row" }, [
-                    _vm._m(4),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-6" }, [
                       _c("input", {
@@ -47781,7 +47791,7 @@ var render = function() {
                     "table",
                     { staticClass: "table table-bordered table-hover" },
                     [
-                      _vm._m(5),
+                      _vm._m(7),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -47871,7 +47881,7 @@ var render = function() {
                           "table",
                           { staticClass: "table table-bordered table-hover" },
                           [
-                            _vm._m(6),
+                            _vm._m(8),
                             _vm._v(" "),
                             _c(
                               "tbody",
@@ -47937,7 +47947,7 @@ var render = function() {
                               attrs: { id: "table_id" }
                             },
                             [
-                              _vm._m(7, true),
+                              _vm._m(9, true),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -48009,7 +48019,7 @@ var render = function() {
                       "table",
                       { staticClass: "table table-bordered table-hover" },
                       [
-                        _vm._m(8),
+                        _vm._m(10),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -48045,14 +48055,14 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-12 mb-2" }, [
                 _c("div", { staticClass: "card" }, [
-                  _vm._m(9),
+                  _vm._m(11),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body table-responsive p-0" }, [
                     _c(
                       "table",
                       { staticClass: "table table-bordered table-hover" },
                       [
-                        _vm._m(10),
+                        _vm._m(12),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -48104,6 +48114,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [
+      _c("h4", [_vm._v("الفواتير المعدله")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticClass: "text-center" }, [
         _c("th", [_vm._v("رقم الفاتوره")]),
@@ -48112,6 +48130,14 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("التحكم")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [
+      _c("h4", [_vm._v("الفواتير المحذوفه")])
     ])
   },
   function() {

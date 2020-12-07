@@ -27,6 +27,9 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-6">
+                                        <h4>الفواتير المعدله</h4>
+                                    </div>
+                                    <div class="col-6">
                                         <input type="text" placeholder="بحث ...." class="form-control"
                                                v-model="orderSearch" @keyup="loadData()">
                                     </div>
@@ -64,6 +67,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="row">
+                                    <div class="col-6">
+                                        <h4>الفواتير المحذوفه</h4>
+                                    </div>
                                     <div class="col-6">
                                         <input type="text" placeholder="بحث ...." class="form-control"
                                                v-model="deletedOrderSearch" @keyup="loadDeletedData()">
