@@ -17,7 +17,9 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->name != null && $request->category != null) {
+        if($request->lessThan != null) {
+          return Product::where('stock', '<=', $request->lessThan)->paginate(10);
+        } elseif ($request->name != null && $request->category != null) {
             return Product::where('name', 'like', '%' . $request->name . '%')->where('category_id', $request->category)->latest()->paginate(5);
         } elseif($request->name != null) {
             return Product::where('name', 'like', '%' . $request->name . '%')->latest()->paginate(5);

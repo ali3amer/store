@@ -26,9 +26,11 @@
                 <router-link to="/orders">المبيعات</router-link>
             </li>
         @endif
-        <li>
-            <router-link to="/reports">التقارير</router-link>
-        </li>
+        @if(Auth::user()->hasRole('super_admin'))
+            <li>
+                <router-link to="/reports">التقارير</router-link>
+            </li>
+        @endif
         @if(Auth::user()->hasPermission('create_expenses') || Auth::user()->hasPermission('read_expenses'))
             <li>
                 <router-link to="/expenses">المصروفات</router-link>
@@ -40,8 +42,12 @@
                 <router-link to="/settings">الإعدادات</router-link>
             </li>
 
+            <li>
+                <router-link to="/control">متابعة المستخدمين</router-link>
+            </li>
+
                 <li>
-                    <router-link to="/control">متابعة المستخدمين</router-link>
+                    <router-link to="/count">منتجات على وشك النفاد</router-link>
                 </li>
         @endif
     </ul>

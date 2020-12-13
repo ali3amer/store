@@ -57,7 +57,7 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <pagination :data="rows" @pagination-change-page="getResults"></pagination>
+                                <pagination :limit="5" :data="rows" @pagination-change-page="getResults"></pagination>
 
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <pagination :data="deletedRows"
+                                <pagination :limit="5" :data="deletedRows"
                                             @pagination-change-page="getDeletedResults"></pagination>
 
                             </div>
@@ -144,7 +144,7 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <pagination :data="expenseRows" @pagination-change-page="getResults"></pagination>
+                                <pagination :limit="5" :data="expenseRows" @pagination-change-page="getResults"></pagination>
 
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <pagination :data="expenseRows" @pagination-change-page="getResults"></pagination>
+                                <pagination :limit="5" :data="expenseRows" @pagination-change-page="getResults"></pagination>
 
                             </div>
                         </div>

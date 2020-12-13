@@ -89,7 +89,7 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <pagination :data="rows"
+                                                <pagination :limit="2" :data="rows"
                                                             @pagination-change-page="getResults"></pagination>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                                <pagination :data="categories"
+                                                                <pagination :limit="5" :data="categories"
                                                                             @pagination-change-page="getCategoryResults"></pagination>
                                                             </div>
                                                         </div>
@@ -202,7 +202,7 @@
                                                     class="fa fa-search"></i></button>
                                                 <div class="modal fade" id="client-search" tabindex="-1"
                                                      aria-hidden="true">
-                                                    <div class="modal-dialog modal-sm">
+                                                    <div class="modal-dialog modal-center">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <input type="text" v-model="clientSearch"
@@ -241,7 +241,7 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                                <pagination :data="clients"
+                                                                <pagination :limit="1" :data="clients"
                                                                             @pagination-change-page="getClientResults"></pagination>
 
                                                             </div>
@@ -315,7 +315,7 @@
                                                             </div>
 
                                                             <div class="modal-footer">
-                                                                <pagination :data="products"
+                                                                <pagination :limit="2" :data="products"
                                                                             @pagination-change-page="getProductResults"></pagination>
 
                                                             </div>

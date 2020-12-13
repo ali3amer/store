@@ -29,8 +29,19 @@
   <component name="ChangeListManager">
     <list default="true" id="0ecf9a02-88ba-438b-bf77-fe47f09329b8" name="Default Changelist" comment="nhnh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Categories.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Categories.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Clients.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Clients.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Control.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Control.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Expenses.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Expenses.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Orders.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Orders.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Products.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Products.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Reports.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Reports.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Users.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/sidebar.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +183,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Dashboard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -181,15 +192,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
       <recent name="C:\xampp\htdocs\store\resources\js\components" />
+      <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
       <recent name="C:\xampp\htdocs\store\public\dashboard\js" />
       <recent name="C:\xampp\htdocs\store\public\dashboard\css" />
       <recent name="C:\xampp\htdocs\store\public\login_desgin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\store\app\Http\Controllers\Dashboard" />
     </key>
   </component>
   <component name="RunManager">
@@ -277,7 +288,10 @@
       <workItem from="1607166628825" duration="12951000" />
       <workItem from="1607263637040" duration="9782000" />
       <workItem from="1607348253124" duration="596000" />
-      <workItem from="1607353852483" duration="2346000" />
+      <workItem from="1607353852483" duration="2690000" />
+      <workItem from="1607630012203" duration="32000" />
+      <workItem from="1607630552493" duration="597000" />
+      <workItem from="1607874075887" duration="7104000" />
     </task>
     <servers />
   </component>
@@ -314,6 +328,10 @@
       <screen x="0" y="0" width="1344" height="800" />
     </state>
     <state x="249" y="0" key="CommitChangelistDialog2/0.0.1344.800@0.0.1344.800" timestamp="1606415093457" />
+    <state x="453" y="153" key="FileChooserDialogImpl" timestamp="1607634828113">
+      <screen x="0" y="0" width="1344" height="800" />
+    </state>
+    <state x="453" y="153" key="FileChooserDialogImpl/0.0.1344.800@0.0.1344.800" timestamp="1607634828113" />
     <state x="453" y="84" key="NewPhpClassDialog" timestamp="1604693886847">
       <screen x="0" y="0" width="1344" height="800" />
     </state>
@@ -343,10 +361,10 @@
     </state>
     <state x="372" y="181" key="run.anything.popup/0.0.1344.800@0.0.1344.800" timestamp="1604860331623" />
     <state x="425" y="186" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605183829163" />
-    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup" timestamp="1607198883716">
+    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup" timestamp="1607887053851">
       <screen x="0" y="0" width="1344" height="800" />
     </state>
-    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup/0.0.1344.800@0.0.1344.800" timestamp="1607198883716" />
+    <state x="377" y="141" width="672" height="659" key="search.everywhere.popup/0.0.1344.800@0.0.1344.800" timestamp="1607887053851" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1606636799623" />
     <state x="395" y="299" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602344344691">
       <screen x="0" y="0" width="1344" height="800" />

@@ -50,7 +50,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                <pagination :data="rows" @pagination-change-page="getResults"></pagination>
+                <pagination :limit="5" :data="rows" @pagination-change-page="getResults"></pagination>
 
             </div>
         </div>

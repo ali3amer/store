@@ -66,7 +66,7 @@
                                                                         </table>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <pagination :data="categories"
+                                                                        <pagination :limit="5" :data="categories"
                                                                                     @pagination-change-page="getResults"></pagination>
                                                                     </div>
                                                                 </div>
@@ -225,10 +225,7 @@
 
                         <div class="invoice-box" id="myTable">
                             <div class="information text-center">
-                                <h3>{{ setting.name }}</h3>
-                                <div>{{ setting.location }}</div>
-                                <div>{{ setting.telephones }}</div>
-                                <div>فاتوره رقم : {{ orderId }}</div>
+                                <h3>جرد</h3>
                             </div>
 
                             <div v-for="(row, index) in rows">
@@ -277,10 +274,8 @@
                         <div class="invoice-box" id="today">
 
                             <div class="information text-center">
-                                <h3>{{ setting.name }}</h3>
-                                <div>{{ setting.location }}</div>
-                                <div>{{ setting.telephones }}</div>
-                                <div>فاتوره رقم : {{ orderId }}</div>
+
+                                <h3><span>التاريخ: </span><span>{{ today_date }}</span></h3>
                             </div>
 
                             <div v-for="(day, index) in today">
@@ -391,6 +386,7 @@ export default {
             from_to_sum: {},
             today_sum: {},
             from_to: {},
+            today_date: '',
             today_form: new Form({
                 id: '',
                 name: 'today',
@@ -583,6 +579,7 @@ export default {
                         this.expenses = {};
                         this.rows = {};
                         this.today = data.categories;
+                        this.today_date = data.date;
                         this.today_sum = data.today_sum;
 
                         // this.sumPrice = data.sumPrice;

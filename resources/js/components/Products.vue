@@ -75,7 +75,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        <pagination :data="rows" @pagination-change-page="getResults"></pagination>
+                        <pagination :limit="5" :data="rows" @pagination-change-page="getResults"></pagination>
 
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <pagination :data="details" @pagination-change-page="getDetailResults"></pagination>
+                        <pagination :limit="5" :data="details" @pagination-change-page="getDetailResults"></pagination>
                     </div>
                 </div>
                 <!-- /.card -->
@@ -334,7 +334,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <pagination :data="prices" @pagination-change-page="getPriceResults"></pagination>
+                            <pagination :limit="5" :data="prices" @pagination-change-page="getPriceResults"></pagination>
                         </div>
                     </form>
                 </div>

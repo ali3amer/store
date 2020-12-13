@@ -142,8 +142,9 @@ class ReportController extends Controller
 
             }
 
+            $date = date('Y-m-d');
 
-            return response()->json(['categories' => $categories, 'today_sum' => $today_sum]);
+            return response()->json(['categories' => $categories, 'today_sum' => $today_sum, 'date' => $date]);
 
         }
 

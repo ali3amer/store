@@ -1,23 +1,16 @@
 <template>
     <div>
 
-        <!--        <div v-if="!$gate.isAdminOrAuthor()">-->
-        <!--            <not-found></not-found>-->
-        <!--        </div>-->
-        <div v-if="'read_categories' in allPermissions" class="card">
+        <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-3"><h3 class="card-title">{{ title }}</h3></div>
-                            <div class="col-6"><input type="text" placeholder="بحث ...." class="form-control"
-                                                      v-model="searchCategory" @keyup="searchResults"></div>
-                        </div>
+                    <div class="col-4">
+                        <h3 class="card-title">{{ title }}</h3>
                     </div>
-                    <div class="col-6">
-                        <div class="card-tools text-right">
-                            <button v-if="'create_categories' in allPermissions" class="btn btn-primary" data-toggle="modal" @click="newModal()"
-                                    :data-target="'#' + modalTitle"><i class="fa fa-plus"></i></button>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-4 mt-2">إذا كانت الكميه بالمخزن أقل من</div>
+                            <div class="col-2"><input v-model="count" @keyup="loadData" class="form-control" type="text"></div>
                         </div>
                     </div>
                 </div>
@@ -29,6 +22,8 @@
                     <tr class="text-center">
                         <th>الرقم</th>
                         <th>الاسم</th>
+                        <th>السعر</th>
+                        <th>الكميه</th>
                         <th>التحكم</th>
                     </tr>
                     </thead>
@@ -36,9 +31,20 @@
                     <tr v-for="(row, index) in rows.data" :key="row.id">
                         <td>{{ index + 1 }}</td>
                         <td>{{ row.name }}</td>
+                        <td>{{ row.sale_price }}</td>
+                        <td>{{ row.stock }}</td>
                         <td>
-                            <a v-if="'update_categories' in allPermissions" href="#" :data-target="'#' + modalTitle" @click="editModal(row)"><i
-                                class="fa fa-edit blue"></i></a> / <a  v-if="'delete_categories' in allPermissions"href="#" @click="deleteData(row.id)"><i
+
+                            <a href="#" data-target="#add_detail" @click="newDetail(row)"><i
+                                class="fa fa-plus blue"></i></a> /
+                            <a href="#" @click="loadDetail(row)"><i
+                                class="fa fa-eye blue"></i></a> /
+
+                            <a href="#" @click="loadPrice(row)"><i
+                                class="fa fa-money blue"></i></a> /
+
+                            <a v-if="'update_products' in allPermissions" href="#" :data-target="'#' + modalTitle" @click="editModal(row)"><i
+                                class="fa fa-edit blue"></i></a> / <a v-if="'delete_products' in allPermissions" href="#" @click="deleteData(row.id)"><i
                             class="fa fa-trash red"></i></a>
                         </td>
                     </tr>
@@ -46,45 +52,12 @@
                 </table>
             </div>
             <div class="card-footer">
-                <pagination :limit="5"  :data="rows" @pagination-change-page="getResults"></pagination>
+                <pagination :limit="5" :data="rows" @pagination-change-page="getResults"></pagination>
 
             </div>
         </div>
         <!-- /.box -->
 
-        <div class="modal fade" :id="modalTitle" tabindex="-1" role="dialog" aria-labelledby="addNewLabel"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-
-                <div class="modal-content">
-                    <form @submit.prevent="editMode ? updateData() : createData()">
-                        <div class="modal-header">
-                            <h4 class="modal-title" style="display:inline-block" v-show="editMode" id="addNewLabel1">
-                                تعديل بيانات {{ subtitle }}</h4>
-                            <h4 class="modal-title" style="display:inline-block" v-show="!editMode" id="addNewLabel">
-                                إضافة {{ subtitle }} جديد</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="form.name" type="text" name="name" placeholder="إسم القسم"
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                                <has-error :form="form" field="name"></has-error>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" v-show="editMode" class="btn btn-success">تعديل</button>
-                            <button type="submit" v-show="!editMode" class="btn btn-primary">إضافه</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
 
     </div>
 </template>
@@ -94,20 +67,23 @@ export default {
     data() {
         return {
             editMode: false,
-            modalTitle: 'categories',
-            routeName: 'category',
-            title: 'الأقسام',
-            subtitle: 'قسم',
-            searchCategory: '',
+            modalTitle: 'settings',
+            routeName: 'product',
+            title: 'منتجات على وشك النفاد',
+            subtitle: 'إعداد',
+            count: '',
+            searchClient: '',
             allPermissions: {},
             rows: {},
             form: new Form({
                 id: '',
                 name: '',
+                telephones: '',
+                location: ''
             })
         }
     },
-    props:['auth_id', 'permissions'],
+    props: ['auth_id', 'permissions'],
     methods: {
         getResults(page = 1) {
             axios.get('api/' + this.routeName + '?page=' + page)
@@ -116,9 +92,9 @@ export default {
                 });
         },
         searchResults() {
-            if (this.searchCategory != '') {
-                axios.get('api/' + this.routeName + '?name=' + this.searchCategory).then(({data}) => (this.rows = data));
-            } else if (this.searchCategory == '') {
+            if (this.searchClient != '') {
+                axios.get('api/' + this.routeName + '?name=' + this.searchClient).then(({data}) => (this.rows = data));
+            } else if (this.searchClient == '') {
                 axios.get('api/' + this.routeName).then(({data}) => (this.rows = data));
             }
         },
@@ -186,14 +162,14 @@ export default {
         },
         loadData() {
             // if(this.$gate.isAdminOrAuthor()) {
-            axios.get('api/'+ this.routeName).then(({data}) => (this.rows = data));
+            axios.get('api/' + this.routeName + '?lessThan=' + this.count).then(({data}) => (this.rows = data));
             // }
         },
         createData() {
             this.$Progress.start();
             $("#" + this.modalTitle).modal('hide');
             this.form
-                .post("api/"+ this.routeName)
+                .post("api/" + this.routeName)
                 .then(() => {
                     // Fire.$emit("afterCreate");
                     $("#" + this.modalTitle).modal("hide");
@@ -214,11 +190,9 @@ export default {
     },
     created() {
 
-        this.loadData();
+        //
 
-        for (let permission in this.permissions) {
-            this.allPermissions[this.permissions[permission]] = this.permissions[permission];
-        }
+
     }
 }
 </script>
